@@ -408,6 +408,7 @@
                     <h4>Oompa Loompas and Syntax Errors</h4>
                     <img src="Gemini_Generated_Image_tevx5btevx5btevx.png" alt="Oompa Loompas and Syntax Errors CD Cover Art" class="cd-cover">
                     <p>Our debut CD! High-speed polka meets low-level bugs.</p>
+                    <a href="Oompa_Loompas_and_Syntax_Errors.zip" class="btn" style="padding: 10px 20px; font-size: 1.1em; margin-top: 10px; margin-bottom: 20px;">Download Full Album (ZIP)</a>
                     <ul class="tracklist" style="margin-top: 15px;">
                         <li><span class="track-num">1</span> Boots on the Floorboards</li>
                         <li><span class="track-num">2</span> Breaded Soldier on the Line</li>
@@ -427,6 +428,7 @@
                     <h4>Polkin' the Hole</h4>
                     <img src="Gemini_Generated_Image_6sl51i6sl51i6sl5.png" alt="Polkin' the Hole CD Cover Art" class="cd-cover">
                     <p>The latest smash hit! Even more accordion, even more power.</p>
+                    <a href="Polkin_the_Hole.zip" class="btn" style="padding: 10px 20px; font-size: 1.1em; margin-top: 10px; margin-bottom: 20px;">Download Full Album (ZIP)</a>
                     <ul class="tracklist" style="margin-top: 15px;">
                         <li><span class="track-num">1</span> Rafters Ring</li>
                         <li><span class="track-num">2</span> Raise Your Glasses High</li>
@@ -461,7 +463,10 @@
                 </div>
 
                 <div class="controls">
-                    <button id="play-pause-btn">Play</button>
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                        <button id="play-pause-btn">Play</button>
+                        <a id="download-song-link" href="#" download class="btn" style="padding: 10px 20px; font-size: 1em; margin-top: 0; display: none;">Download Song</a>
+                    </div>
                     <div class="seek-container">
                         <span id="current-time">0:00</span>
                         <input type="range" id="seek-bar" value="0" max="100">
@@ -539,6 +544,7 @@
         const durationDisplay = document.getElementById('duration');
         const currentSongTitle = document.getElementById('current-song-title');
         const playerAlbumArt = document.getElementById('player-album-art');
+        const downloadSongLink = document.getElementById('download-song-link');
 
         function formatTime(seconds) {
             const minutes = Math.floor(seconds / 60);
@@ -551,6 +557,12 @@
             audio.src = songs[index].file;
             currentSongTitle.textContent = songs[index].title;
             playerAlbumArt.src = songs[index].albumArt;
+
+            // Update download link
+            downloadSongLink.href = songs[index].file;
+            downloadSongLink.download = songs[index].file.split('/').pop();
+            downloadSongLink.style.display = 'inline-block';
+
             audio.play();
             playPauseBtn.textContent = 'Pause';
         }
