@@ -98,10 +98,19 @@
         }
         header {
             background-color: #b22222;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.05) 20px, rgba(0,0,0,0.05) 40px);
+            background-size: 100px 100px;
+            animation: moveStripes 10s linear infinite;
             color: white;
             padding: 60px 20px;
             border-bottom: 10px dashed #ffdb58;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes moveStripes {
+            from { background-position: 0 0; }
+            to { background-position: 100px 100px; }
         }
         h1 {
             font-family: 'Luckiest Guy', cursive;
@@ -109,15 +118,76 @@
             margin: 0;
             text-transform: uppercase;
             letter-spacing: 4px;
-            text-shadow: 4px 4px 0px #333;
+            text-shadow:
+                1px 1px 0px #333,
+                2px 2px 0px #333,
+                3px 3px 0px #333,
+                4px 4px 0px #333,
+                5px 5px 0px #ffdb58;
+            position: relative;
+            z-index: 1;
         }
+        .letter {
+            display: inline-block;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .letter::before {
+            content: attr(data-letter);
+            display: inline-block;
+            animation: letterBounce 1.5s infinite ease-in-out;
+        }
+        .letter:hover {
+            transform: scale(1.3) rotate(15deg);
+            color: #ffdb58;
+            cursor: pointer;
+        }
+        @keyframes letterBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .letter { color: transparent; }
+        .letter::before { color: white; }
+        .letter:hover::before { color: #ffdb58; }
+        .letter:nth-child(2)::before { animation-delay: 0.1s; }
+        .letter:nth-child(3)::before { animation-delay: 0.2s; }
+        .letter:nth-child(4)::before { animation-delay: 0.3s; }
+        .letter:nth-child(5)::before { animation-delay: 0.4s; }
+        .letter:nth-child(6)::before { animation-delay: 0.5s; }
+        .letter:nth-child(7)::before { animation-delay: 0.6s; }
+        .letter:nth-child(8)::before { animation-delay: 0.7s; }
+        .letter:nth-child(9)::before { animation-delay: 0.8s; }
+        .letter:nth-child(10)::before { animation-delay: 0.9s; }
+
         .accordion-icon {
             display: inline-block;
-            animation: accordionRock 2s infinite ease-in-out;
+            animation: accordionRock 1.5s infinite ease-in-out;
+            margin-right: 10px;
         }
         @keyframes accordionRock {
-            0%, 100% { transform: rotate(-10deg) scale(1); }
-            50% { transform: rotate(10deg) scale(1.1); }
+            0%, 100% { transform: rotate(-15deg) scale(1) translateY(0); }
+            50% { transform: rotate(15deg) scale(1.2) translateY(-10px); }
+        }
+        h1::before, h1::after {
+            content: "🎶";
+            position: absolute;
+            font-size: 0.4em;
+            animation: floatNotes 3s infinite ease-in-out;
+            opacity: 0.7;
+        }
+        h1::before {
+            left: -40px;
+            top: 20px;
+            animation-delay: 0.5s;
+        }
+        h1::after {
+            right: -40px;
+            top: -10px;
+            content: "🎵";
+        }
+        @keyframes floatNotes {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(20deg); }
         }
         p.subtitle {
             font-family: 'Bungee', cursive;
@@ -399,7 +469,10 @@
 <body>
 
     <header>
-        <h1><span class="accordion-icon">🪗</span> POLKAHOLE</h1>
+        <h1 aria-label="POLKAHOLE">
+            <span class="accordion-icon">🪗</span>
+            <span class="letter" data-letter="P"></span><span class="letter" data-letter="O"></span><span class="letter" data-letter="L"></span><span class="letter" data-letter="K"></span><span class="letter" data-letter="A"></span><span class="letter" data-letter="H"></span><span class="letter" data-letter="O"></span><span class="letter" data-letter="L"></span><span class="letter" data-letter="E"></span>
+        </h1>
         <p class="subtitle">100% Pure Polka Power.</p>
     </header>
 
