@@ -184,6 +184,7 @@
             padding: 15px;
             border-bottom: 2px dashed #ffdb58;
             transition: background 0.2s;
+            cursor: pointer;
         }
         .tracklist li:hover {
             background-color: #ffdb58 !important;
@@ -338,9 +339,6 @@
         #volume-slider {
             width: 100px;
             cursor: pointer;
-        }
-        .tracklist li:hover {
-            background-color: #f9f9f9;
         }
 
         @media (max-width: 600px) {
@@ -585,13 +583,13 @@
                     const li = document.createElement('li');
                     li.innerHTML = `<span class="track-num">${index + 1}</span> ${song.title}`;
                     li.style.cursor = 'pointer';
-                    li.onclick = () => loadSong(index);
+                    li.addEventListener('click', () => loadSong(index));
                     songList.appendChild(li);
                 }
             });
         }
 
-        playPauseBtn.onclick = () => {
+        playPauseBtn.addEventListener('click', () => {
             if (audio.paused) {
                 if (currentSongIndex === -1 && songs.length > 0) {
                     loadSong(0);
@@ -603,41 +601,46 @@
                 audio.pause();
                 playPauseBtn.textContent = 'Play';
             }
-        };
+        });
 
-        audio.onloadedmetadata = () => {
+        audio.addEventListener('loadedmetadata', () => {
             durationDisplay.textContent = formatTime(audio.duration);
-        };
+        });
 
-        audio.ontimeupdate = () => {
+        audio.addEventListener('timeupdate', () => {
             if (!isNaN(audio.duration)) {
                 const progress = (audio.currentTime / audio.duration) * 100;
                 seekBar.value = progress;
                 currentTimeDisplay.textContent = formatTime(audio.currentTime);
                 durationDisplay.textContent = formatTime(audio.duration);
             }
-        };
+        });
 
-        audio.onended = () => {
+        audio.addEventListener('ended', () => {
             if (currentSongIndex < songs.length - 1) {
                 loadSong(currentSongIndex + 1);
             } else {
                 playPauseBtn.textContent = 'Play';
             }
-        };
+        });
 
-        seekBar.oninput = () => {
+        seekBar.addEventListener('input', () => {
             const time = (seekBar.value / 100) * audio.duration;
             audio.currentTime = time;
-        };
+        });
 
-        volumeSlider.oninput = () => {
+        volumeSlider.addEventListener('input', () => {
             audio.volume = volumeSlider.value;
-        };
+        });
 
-        songSearch.oninput = (e) => {
+        songSearch.addEventListener('input', (e) => {
             renderSongList(e.target.value);
-        };
+        });
+
+        // Enable clicking on tracks in the album cards
+        document.querySelectorAll('.album-card .tracklist li').forEach((li, index) => {
+            li.addEventListener('click', () => loadSong(index));
+        });
 
         // Initial render
         renderSongList();
