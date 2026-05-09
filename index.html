@@ -571,7 +571,11 @@
         };
 
         audio.onended = () => {
-            playPauseBtn.textContent = 'Play';
+            if (currentSongIndex < songs.length - 1) {
+                loadSong(currentSongIndex + 1);
+            } else {
+                playPauseBtn.textContent = 'Play';
+            }
         };
 
         seekBar.oninput = () => {
