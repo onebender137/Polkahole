@@ -402,6 +402,50 @@
         .tracklist li:hover {
             background-color: #f9f9f9;
         }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 40px 10px;
+            }
+            h1 {
+                font-size: 2.5em;
+                letter-spacing: 2px;
+            }
+            p.subtitle {
+                font-size: 1.1em;
+            }
+            .container {
+                margin: 20px 10px;
+                padding: 20px;
+                box-shadow: 10px 10px 0px #ffdb58;
+            }
+            h2, h3 {
+                font-size: 1.8em;
+            }
+            .current-track-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            #player-album-art {
+                width: 80px;
+                height: 80px;
+            }
+            .current-track-info h4 {
+                font-size: 1.4em;
+            }
+            .tracklist li {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+            #fan-zone input {
+                width: 90%;
+            }
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.2em;
+            }
+        }
     </style>
 </head>
 <body>
