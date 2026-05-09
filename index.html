@@ -83,6 +83,91 @@
             font-size: 0.9em;
             color: #666;
         }
+
+        /* Player Styles */
+        .player-container {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #b22222;
+            border-radius: 10px;
+            background-color: #fffaf0;
+        }
+        #song-search {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        #player-ui {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #eee;
+            border-radius: 8px;
+        }
+        .current-track-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+            width: 100%;
+        }
+        #player-album-art {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        .current-track-info h4 {
+            margin: 0;
+            color: #b22222;
+        }
+        .current-track-info p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        #play-pause-btn {
+            background: #b22222;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            align-self: center;
+        }
+        #play-pause-btn:hover {
+            background: #8b0000;
+        }
+        .seek-container, .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+        #seek-bar {
+            flex-grow: 1;
+            cursor: pointer;
+        }
+        #volume-slider {
+            width: 100px;
+            cursor: pointer;
+        }
+        .tracklist li:hover {
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
@@ -102,8 +187,38 @@
             <p>Our debut CD is here! Available now at all our shows.</p>
         </div>
         
-        <h3>Listen to our Music</h3>
-        <p>We are uploading our tracks right now! Check back soon for full songs. 
+        <div class="player-container">
+            <h3>Listen to our Music</h3>
+
+            <input type="text" id="song-search" placeholder="Search songs..." />
+
+            <div id="player-ui">
+                <div class="current-track-info">
+                    <img src="Gemini_Generated_Image_tevx5btevx5btevx.png" alt="Album Art" id="player-album-art">
+                    <div>
+                        <h4 id="current-song-title">Select a song</h4>
+                        <p id="current-song-artist">Polkahole</p>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="play-pause-btn">Play</button>
+                    <div class="seek-container">
+                        <span id="current-time">0:00</span>
+                        <input type="range" id="seek-bar" value="0" max="100">
+                        <span id="duration">0:00</span>
+                    </div>
+                    <div class="volume-container">
+                        <label for="volume-slider">Vol:</label>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+                    </div>
+                </div>
+            </div>
+
+            <ul id="song-list" class="tracklist">
+                <!-- Songs will be populated here by JavaScript -->
+            </ul>
+        </div>
 
         <h3>Upcoming Shows</h3>
         <p>No upcoming shows right now while we practice in the garage. Stay tuned!</p>
@@ -114,6 +229,100 @@
     <footer>
         <p>&copy; 2026 Polkahole. All rights reserved.</p>
     </footer>
+
+    <script>
+        const songs = [
+            { title: "Lose Your Shoes", file: "songs/Lose_Your_Shoes.mp3" },
+            { title: "Rafters Ring", file: "songs/Rafters_Ring.mp3" },
+            { title: "Raise Your Glasses High", file: "songs/Raise_Your_Glasses_High.mp3" }
+        ];
+
+        let currentSongIndex = -1;
+        const audio = new Audio();
+
+        const songList = document.getElementById('song-list');
+        const songSearch = document.getElementById('song-search');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const seekBar = document.getElementById('seek-bar');
+        const volumeSlider = document.getElementById('volume-slider');
+        const currentTimeDisplay = document.getElementById('current-time');
+        const durationDisplay = document.getElementById('duration');
+        const currentSongTitle = document.getElementById('current-song-title');
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
+
+        function loadSong(index) {
+            currentSongIndex = index;
+            audio.src = songs[index].file;
+            currentSongTitle.textContent = songs[index].title;
+            audio.play();
+            playPauseBtn.textContent = 'Pause';
+        }
+
+        function renderSongList(filter = '') {
+            songList.innerHTML = '';
+            songs.forEach((song, index) => {
+                if (song.title.toLowerCase().includes(filter.toLowerCase())) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span class="track-num">${index + 1}</span> ${song.title}`;
+                    li.style.cursor = 'pointer';
+                    li.onclick = () => loadSong(index);
+                    songList.appendChild(li);
+                }
+            });
+        }
+
+        playPauseBtn.onclick = () => {
+            if (audio.paused) {
+                if (currentSongIndex === -1 && songs.length > 0) {
+                    loadSong(0);
+                } else {
+                    audio.play();
+                    playPauseBtn.textContent = 'Pause';
+                }
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = 'Play';
+            }
+        };
+
+        audio.onloadedmetadata = () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+        };
+
+        audio.ontimeupdate = () => {
+            if (!isNaN(audio.duration)) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                seekBar.value = progress;
+                currentTimeDisplay.textContent = formatTime(audio.currentTime);
+                durationDisplay.textContent = formatTime(audio.duration);
+            }
+        };
+
+        audio.onended = () => {
+            playPauseBtn.textContent = 'Play';
+        };
+
+        seekBar.oninput = () => {
+            const time = (seekBar.value / 100) * audio.duration;
+            audio.currentTime = time;
+        };
+
+        volumeSlider.oninput = () => {
+            audio.volume = volumeSlider.value;
+        };
+
+        songSearch.oninput = (e) => {
+            renderSongList(e.target.value);
+        };
+
+        // Initial render
+        renderSongList();
+    </script>
 
 </body>
 </html>
