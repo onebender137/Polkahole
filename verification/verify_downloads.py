@@ -12,11 +12,23 @@ async def verify_downloads():
         await page.goto(file_path)
 
         # Verify Album Download Links
-        album_zips = ["Oompa_Loompas_and_Syntax_Errors.zip", "Polkin_the_Hole.zip"]
-        for zip_name in album_zips:
-            link = page.locator(f"a[href='{zip_name}']")
-            await link.wait_for(state="visible")
-            print(f"Found album download link: {zip_name}")
+        # Album 0
+        await page.locator(".album-thumb[data-album='0']").click()
+        link0 = page.locator("a[href='Oompa_Loompas_and_Syntax_Errors.zip']")
+        await link0.wait_for(state="visible")
+        print("Found album download link: Oompa_Loompas_and_Syntax_Errors.zip")
+
+        # Album 1
+        await page.locator(".album-thumb[data-album='1']").click()
+        link1 = page.locator("a[href='Polkin_the_Hole.zip']")
+        await link1.wait_for(state="visible")
+        print("Found album download link: Polkin_the_Hole.zip")
+
+        # Album 2 (Whoa Polka!)
+        await page.locator(".album-thumb[data-album='2']").click()
+        link2 = page.locator("a[href='Whoa_Polka.zip']")
+        await link2.wait_for(state="visible")
+        print("Found album download link: Whoa_Polka.zip")
 
         # Verify Music Player Download Link
         download_link = page.locator("#download-song-link")

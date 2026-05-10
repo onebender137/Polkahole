@@ -18,8 +18,8 @@ def verify_polkahole():
         expect(page.locator("#shows")).to_be_visible()
         expect(page.locator("#fan-zone")).to_be_visible()
 
-        # Check for the accordion icon and title
-        expect(page.locator("h1")).to_contain_text("POLKAHOLE")
+        # Check for the accordion icon and title (using aria-label for animated text)
+        expect(page.locator("h1")).to_have_attribute("aria-label", "POLKAHOLE")
 
         # Check the music player interactivity
         play_btn = page.locator("#play-pause-btn")
