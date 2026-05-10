@@ -17,6 +17,7 @@
     <title>Polkahole | Official Band Site</title>
     <meta name="description" content="Official site of Polkahole - the high-energy polka band! Listen to our debut album 'Oompa Loompas and Syntax Errors' and join the polka revolution.">
     <meta name="keywords" content="polka, accordion, Polkahole, band, music, Oompa Loompas and Syntax Errors, folk music">
+    <link rel="canonical" href="https://polkahole.ca/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -803,6 +804,34 @@
             return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
         }
 
+        function updateMetadata(index) {
+            const song = songs[index];
+            const title = `${song.title} | Polkahole Official`;
+            const description = `Listen to "${song.title}" by Polkahole, the loudest, fastest, and most accordion-heavy band this side of the Danube!`;
+            const url = `${window.location.origin}${window.location.pathname}?song=${index}`;
+            const image = `${window.location.origin}/${song.albumArt}`;
+
+            document.title = title;
+
+            // Meta tags
+            document.querySelector('meta[name="description"]').setAttribute('content', description);
+
+            // Open Graph
+            document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+            document.querySelector('meta[property="og:url"]').setAttribute('content', url);
+            document.querySelector('meta[property="og:image"]').setAttribute('content', image);
+
+            // Twitter
+            document.querySelector('meta[property="twitter:title"]').setAttribute('content', title);
+            document.querySelector('meta[property="twitter:description"]').setAttribute('content', description);
+            document.querySelector('meta[property="twitter:url"]').setAttribute('content', url);
+            document.querySelector('meta[property="twitter:image"]').setAttribute('content', image);
+
+            // Canonical
+            document.querySelector('link[rel="canonical"]').setAttribute('href', url);
+        }
+
         function loadSong(index) {
             currentSongIndex = index;
             audio.src = songs[index].file;
@@ -816,6 +845,8 @@
 
             // Update share button
             shareSongBtn.style.display = 'inline-block';
+
+            updateMetadata(index);
 
             audio.play();
             playPauseBtn.textContent = 'Pause';
