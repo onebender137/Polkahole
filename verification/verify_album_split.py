@@ -1,22 +1,27 @@
 import pytest
+import os
 from playwright.sync_api import Page, expect
 
 def test_album_display(page: Page):
-    page.goto("http://localhost:8080/index.html")
+    path = os.path.abspath("index.html")
+    page.goto(f"file://{path}")
 
     # Check for the main heading
     expect(page.locator("h2:has-text('Our Albums')")).to_be_visible()
 
-    # Check for both album cards
-    expect(page.locator("h4:has-text('Oompa Loompas and Syntax Errors')")).to_be_visible()
-    expect(page.locator("h4:has-text(\"Polkin' the Hole\")")).to_be_visible()
+    # Check for all three album cards (using attached status since only one is visible at a time)
+    expect(page.locator("h4:has-text('Oompa Loompas and Syntax Errors')")).to_be_attached()
+    expect(page.locator("h4:has-text(\"Polkin' the Hole\")")).to_be_attached()
+    expect(page.locator("h4:has-text('Whoa Polka!')")).to_be_attached()
 
-    # Check for both album covers
-    expect(page.locator("img[alt='Oompa Loompas and Syntax Errors CD Cover Art']")).to_be_visible()
-    expect(page.locator("img[alt=\"Polkin' the Hole CD Cover Art\"]")).to_be_visible()
+    # Check for all three album covers
+    expect(page.locator("img[alt='Oompa Loompas and Syntax Errors CD Cover Art']")).to_be_attached()
+    expect(page.locator("img[alt=\"Polkin' the Hole CD Cover Art\"]")).to_be_attached()
+    expect(page.locator("img[alt='Whoa Polka! CD Cover Art']")).to_be_attached()
 
 def test_track_counts(page: Page):
-    page.goto("http://localhost:8080/index.html")
+    path = os.path.abspath("index.html")
+    page.goto(f"file://{path}")
 
     # Oompa Loompas should have 12 tracks
     oompa_tracks = page.locator(".album-card").filter(has_text="Oompa Loompas and Syntax Errors").locator(".tracklist li")
@@ -26,8 +31,13 @@ def test_track_counts(page: Page):
     polkin_tracks = page.locator(".album-card").filter(has_text="Polkin' the Hole").locator(".tracklist li")
     expect(polkin_tracks).to_have_count(13)
 
+    # Whoa Polka! should have 11 tracks
+    whoa_tracks = page.locator(".album-card").filter(has_text="Whoa Polka!").locator(".tracklist li")
+    expect(whoa_tracks).to_have_count(11)
+
 def test_player_art_switching(page: Page):
-    page.goto("http://localhost:8080/index.html")
+    path = os.path.abspath("index.html")
+    page.goto(f"file://{path}")
 
     player_art = page.locator("#player-album-art")
 
@@ -38,3 +48,7 @@ def test_player_art_switching(page: Page):
     # Load 13th song (Polkin' the Hole)
     page.locator("#song-list li").nth(12).click()
     expect(player_art).to_have_attribute("src", "Gemini_Generated_Image_6sl51i6sl51i6sl5.png")
+
+    # Load 26th song (Whoa Polka!)
+    page.locator("#song-list li").nth(25).click()
+    expect(player_art).to_have_attribute("src", "Whoa_Polka_Art.png")
