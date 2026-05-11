@@ -29,7 +29,7 @@ async def verify_seo_metadata():
 
         # 4. Verify Twitter tags
         twitter_image = await page.get_attribute('meta[property="twitter:image"]', 'content')
-        assert "Gemini_Generated_Image_tevx5btevx5btevx.png" in twitter_image, f"Twitter image should be album art, got: {twitter_image}"
+        assert "Gemini_Generated_Image_tevx5btevx5btevx.webp" in twitter_image, f"Twitter image should be album art, got: {twitter_image}"
 
         # 5. Verify Canonical link
         canonical = await page.get_attribute('link[rel="canonical"]', 'href')

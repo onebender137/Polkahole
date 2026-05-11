@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+videos/
+verification/polkahole_final.png
+verification/playback_final.png
+verification/seo_final.png
