@@ -43,12 +43,12 @@ def test_player_art_switching(page: Page):
 
     # Load first song (Oompa Loompas)
     page.locator("#song-list li").nth(0).click()
-    expect(player_art).to_have_attribute("src", "Gemini_Generated_Image_tevx5btevx5btevx.png")
+    expect(player_art).to_have_attribute("src", "Gemini_Generated_Image_tevx5btevx5btevx.webp")
 
     # Load 13th song (Polkin' the Hole)
     page.locator("#song-list li").nth(12).click()
-    expect(player_art).to_have_attribute("src", "Gemini_Generated_Image_6sl51i6sl51i6sl5.png")
+    expect(player_art).to_have_attribute("src", "Gemini_Generated_Image_6sl51i6sl51i6sl5.webp")
 
     # Load 26th song (Whoa Polka!)
     page.locator("#song-list li").nth(25).click()
-    expect(player_art).to_have_attribute("src", "Whoa_Polka_Art.png")
+    expect(player_art).to_have_attribute("src", "Whoa_Polka_Art.webp")

@@ -47,8 +47,8 @@ async def verify_downloads():
         print(f"Download song link visible. href: {href}, download: {download_attr}")
 
         # Take screenshot
-        await page.screenshot(path="verification/downloads_verify.png", full_page=True)
-        print("Screenshot saved to verification/downloads_verify.png")
+        await page.screenshot(path="verification/downloads_verify.webp", full_page=True)
+        print("Screenshot saved to verification/downloads_verify.webp")
 
         await browser.close()
 
