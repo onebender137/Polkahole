@@ -576,6 +576,92 @@
         .share-fb { background: #1877F2; }
         .share-reddit { background: #FF4500; }
         .share-copy { background: #b22222; }
+      .summit-release {
+background: #fff;
+margin: 0;
+padding: 50px 25px;
+border-bottom: 8px dashed #ffdb58;
+}
+
+.summit-alert {
+text-align: center;
+font-family: 'Bungee', cursive;
+font-size: 1.2em;
+color: #b22222;
+margin-bottom: 20px;
+}
+
+.summit-inner {
+max-width: 1400px;
+margin: auto;
+display: flex;
+gap: 40px;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.summit-text {
+flex: 1;
+min-width: 350px;
+}
+
+.summit-text h2 {
+font-size: 3em;
+margin-bottom: 20px;
+}
+
+.summit-image {
+flex: 1;
+min-width: 350px;
+}
+
+.summit-image img {
+width: 100%;
+border-radius: 20px;
+border: 6px solid #333;
+box-shadow: 10px 10px 0px #ffdb58;
+}
+
+.incident-box {
+background: #fdf5e6;
+border: 4px solid #b22222;
+border-radius: 15px;
+padding: 20px;
+margin: 25px 0;
+}
+
+.incident-box h3 {
+margin-top: 0;
+font-size: 1.4em;
+}
+
+.incident-box ul {
+margin: 0;
+padding-left: 25px;
+}
+
+.summit-tagline {
+font-style: italic;
+font-size: 1.2em;
+color: #b22222;
+margin-bottom: 25px;
+}
+
+@media (max-width: 900px) {
+
+```
+.summit-inner {
+    flex-direction: column;
+}
+
+.summit-text h2 {
+    font-size: 2em;
+}
+```
+
+}
+
     </style>
 </head>
 <body>
@@ -587,6 +673,78 @@
         </h1>
         <p class="subtitle">100% Pure Polka Power.</p>
     </header>
+<section class="summit-release">
+
+```
+<div class="summit-alert">
+    🚨 NEW POLKA RELEASE 🚨
+</div>
+
+<div class="summit-inner">
+
+    <div class="summit-text">
+
+        <h2>🏔️ THE SUMMIT IS ATTAINED 🏔️</h2>
+
+        <p>
+            Some guy claiming to be the
+            <strong>"System Operator"</strong>
+            keeps clogging our pipes with
+            bio-hack stacks, edible-powered immune system theories,
+            and explanations that somehow make less sense the longer
+            they go on.
+        </p>
+
+        <p>
+            Naturally, we turned the entire incident into a
+            POLKA BANGER.
+        </p>
+
+        <div class="incident-box">
+
+            <h3>POLKAHOLE INCIDENT REPORT #137</h3>
+
+            <ul>
+                <li>🍃 Edible consumed</li>
+                <li>🧬 Bio-hack stack deployed</li>
+                <li>⚙️ Pipes interfered with</li>
+                <li>📈 Summit reportedly attained</li>
+                <li>🪗 Accordions activated</li>
+            </ul>
+
+        </div>
+
+        <p class="summit-tagline">
+            "This should absolutely become a song."
+            — Polkahole Safety Committee
+        </p>
+
+        <audio controls style="width:100%;">
+            <source src="songs/unreleased/The_Summit_Is_Attained.mp3" type="audio/mpeg">
+        </audio>
+
+        <div style="margin-top:20px;">
+            <a href="songs/unreleased/The_Summit_Is_Attained.mp3"
+               download
+               class="btn">
+               Download Track
+            </a>
+        </div>
+
+    </div>
+
+    <div class="summit-image">
+
+        <img
+            src="Gemini_Generated_Image_p2v6kep2v6kep2v6-clean.png"
+            alt="The Summit Is Attained">
+
+    </div>
+
+</div>
+```
+
+</section>
 
     <main class="container">
         <section id="welcome">
