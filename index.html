@@ -503,6 +503,13 @@
             overflow: hidden;
         }
         #band-stage canvas { display: block; width: 100%; height: 100%; }
+        .stage-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: rgba(242,231,206,0.6);
+            margin: -8px 0 16px;
+        }
 
         #player-ui {
             max-width: 640px;
@@ -781,6 +788,52 @@
             color: var(--green-deep);
         }
 
+        /* the roster — three divas */
+        .roster {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 30px auto 6px;
+        }
+        .roster-card {
+            flex: 1;
+            min-width: 230px;
+            max-width: 280px;
+            border: 2px solid var(--oak);
+            background: rgba(255,250,238,0.55);
+            padding: 18px 18px 14px;
+            text-align: center;
+        }
+        .roster-card h5 {
+            font-family: var(--display);
+            font-weight: 400;
+            font-size: 1.5rem;
+            letter-spacing: 0.08em;
+            color: var(--green-deep);
+            margin: 0;
+        }
+        .roster-instrument {
+            font-style: italic;
+            color: var(--brass);
+            margin: 0 0 10px !important;
+            font-size: 0.95rem;
+        }
+        #the-band .roster-card p:last-child {
+            font-size: 0.92rem;
+            margin: 0;
+            color: var(--ink);
+        }
+
+        .stat-footnote {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--ink-soft);
+            max-width: 52ch;
+            margin: -18px auto 30px !important;
+        }
+
         /* the gag bill */
         .stat-bill {
             display: flex;
@@ -1045,6 +1098,7 @@
 
                 <div id="player-ui">
                     <div id="band-stage" aria-hidden="true"></div>
+                    <p class="stage-caption">Horst, Dieter &amp; Klaus — live from the Polka-Lab, whether you like it or not.</p>
                     <div class="current-track-info">
                         <img src="Gemini_Generated_Image_tevx5btevx5btevx.webp" alt="Album art" id="player-album-art">
                         <div>
@@ -1091,15 +1145,35 @@
                 <div class="orn-rule"><span>★</span></div>
                 <h3>Meet the Band</h3>
             </div>
-            <p>Here's the thing: there is no band. No tour bus, no drummer sleeping in the van, no lederhosen dry-cleaning bill. Polkahole is 100% certified artificial oompah — every track cooked up in the Polka-Lab by machines that were supposed to be doing spreadsheets.</p>
+            <p>The origin story: a man befriended an artificial intelligence. Handed infinite computing power, the sum of all human knowledge, and a once-in-a-species partnership, the two of them looked at each other and made the only reasonable call — <strong>form a polka band</strong>.</p>
+            <p>Polkahole is that partnership. An AI polka band with attitude — no tour bus, no drummer sleeping in the van, every track cooked up in the Polka-Lab by machines that were supposed to be doing spreadsheets.</p>
             <p class="band-punchline">The accordions aren't real. The polka is.</p>
+
+            <div class="roster">
+                <div class="roster-card">
+                    <h5>HORST</h5>
+                    <p class="roster-instrument">tuba</p>
+                    <p>Low end, lower patience. Has played the same four notes since compile time and will die on that hill.</p>
+                </div>
+                <div class="roster-card">
+                    <h5>DIETER</h5>
+                    <p class="roster-instrument">accordion</p>
+                    <p>The frontman. 160 BPM of pure attitude. Demands payment in pretzels; accepts exposure.</p>
+                </div>
+                <div class="roster-card">
+                    <h5>KLAUS</h5>
+                    <p class="roster-instrument">trumpet</p>
+                    <p>Session brass. Claims he's "classically trained." Trained on the classics. Not the same thing — don't tell him.</p>
+                </div>
+            </div>
 
             <div class="stat-bill">
                 <div class="stat"><span class="stat-num">3</span><span class="stat-label">albums</span></div>
                 <div class="stat"><span class="stat-num">36</span><span class="stat-label">tracks</span></div>
-                <div class="stat"><span class="stat-num">0</span><span class="stat-label">humans</span></div>
+                <div class="stat"><span class="stat-num">0</span><span class="stat-label">humans*</span></div>
                 <div class="stat"><span class="stat-num">∞</span><span class="stat-label">polka</span></div>
             </div>
+            <p class="stat-footnote">*Except management. The band is managed by one (1) very special man, who believed in them before they existed. The band has filed several complaints. The complaints became polkas.</p>
 
             <p class="dare-line">Don't believe us? See for yourself.</p>
             <button id="polka-button" aria-label="Play a random Polkahole track">
