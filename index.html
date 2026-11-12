@@ -302,6 +302,24 @@
             font-size: 0.72rem;
             letter-spacing: 0;
         }
+        .masthead-side {
+            position: absolute;
+            top: 50%;
+            width: 168px;
+            height: 336px;
+            pointer-events: none;
+        }
+        .masthead-side.left {
+            left: -118px;
+            transform: translateY(-48%) rotate(-3deg);
+        }
+        .masthead-side.right {
+            right: -118px;
+            transform: translateY(-48%) scaleX(-1) rotate(-3deg);
+        }
+        @media (max-width: 1240px) {
+            .masthead-side { display: none; }
+        }
         .masthead-presents {
             font-family: var(--display);
             font-size: clamp(0.95rem, 2vw, 1.15rem);
@@ -1039,8 +1057,59 @@
 <body>
 
     <header class="masthead">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+            <defs>
+                <g id="tavern-spill">
+                    <!-- eighth note, top -->
+                    <g transform="translate(128,28) rotate(14)">
+                        <ellipse cx="-6" cy="26" rx="7" ry="5" transform="rotate(-20 -6 26)" fill="var(--oak)"/>
+                        <rect x="-1" y="-4" width="3.5" height="30" fill="var(--oak)"/>
+                        <path d="M 2,-4 q 11,4 9,15" stroke="var(--oak)" stroke-width="3.5" fill="none"/>
+                    </g>
+                    <!-- wooden keg -->
+                    <g transform="translate(90,86) rotate(-14)">
+                        <path d="M -38,-44 C -47,-18 -47,18 -38,44 L 38,44 C 47,18 47,-18 38,-44 Z" fill="#8a5a2e" stroke="var(--oak)" stroke-width="3.5"/>
+                        <path d="M -42,-24 L 42,-24 M -44,0 L 44,0 M -42,24 L 42,24" stroke="var(--oak)" stroke-width="4"/>
+                        <path d="M -14,-42 L -14,42 M 14,-42 L 14,42" stroke="#6e4322" stroke-width="2"/>
+                        <circle cx="0" cy="12" r="4.5" fill="var(--oak)"/>
+                    </g>
+                    <!-- beer stein -->
+                    <g transform="translate(56,188) rotate(8)">
+                        <rect x="-17" y="-20" width="34" height="42" rx="4" fill="var(--parchment-deep)" stroke="var(--oak)" stroke-width="3"/>
+                        <path d="M 17,-12 C 32,-10 32,12 17,14" stroke="var(--oak)" stroke-width="4.5" fill="none"/>
+                        <circle cx="-10" cy="-22" r="8" fill="#FFF8EA" stroke="var(--oak)" stroke-width="2.5"/>
+                        <circle cx="1" cy="-26" r="9" fill="#FFF8EA" stroke="var(--oak)" stroke-width="2.5"/>
+                        <circle cx="11" cy="-21" r="7" fill="#FFF8EA" stroke="var(--oak)" stroke-width="2.5"/>
+                        <path d="M -10,-6 L 10,-6" stroke="var(--oak)" stroke-width="2"/>
+                    </g>
+                    <!-- horn -->
+                    <g transform="translate(116,224) rotate(16)">
+                        <path d="M -12,16 C -30,30 -30,52 -12,60" stroke="var(--oak)" stroke-width="13" fill="none" stroke-linecap="round"/>
+                        <path d="M -12,16 C -30,30 -30,52 -12,60" stroke="var(--brass)" stroke-width="9" fill="none" stroke-linecap="round"/>
+                        <circle cx="4" cy="2" r="24" fill="var(--brass)" stroke="var(--oak)" stroke-width="3"/>
+                        <circle cx="4" cy="2" r="12" fill="var(--brass-light)" stroke="var(--oak)" stroke-width="2"/>
+                    </g>
+                    <!-- pretzel -->
+                    <g transform="translate(64,296) rotate(-10)">
+                        <circle cx="0" cy="0" r="16" stroke="#a8702f" stroke-width="8" fill="none"/>
+                        <path d="M -11,7 Q 0,-13 11,7" stroke="#a8702f" stroke-width="7" fill="none"/>
+                        <circle cx="-9" cy="-10" r="1.8" fill="#FFF8EA"/>
+                        <circle cx="10" cy="-7" r="1.8" fill="#FFF8EA"/>
+                        <circle cx="0" cy="13" r="1.8" fill="#FFF8EA"/>
+                    </g>
+                    <!-- small note, bottom -->
+                    <g transform="translate(124,330) rotate(-12) scale(0.8)">
+                        <ellipse cx="-6" cy="26" rx="7" ry="5" transform="rotate(-20 -6 26)" fill="var(--oak)"/>
+                        <rect x="-1" y="-4" width="3.5" height="30" fill="var(--oak)"/>
+                        <path d="M 2,-4 q 11,4 9,15" stroke="var(--oak)" stroke-width="3.5" fill="none"/>
+                    </g>
+                </g>
+            </defs>
+        </svg>
         <div class="masthead-frame">
             <span class="masthead-stamp" aria-hidden="true">CERTIFIED<br>ARTIFICIAL OOMPAH<br><i>one human detected</i></span>
+            <svg class="masthead-side left" viewBox="0 0 180 360" aria-hidden="true"><use href="#tavern-spill"/></svg>
+            <svg class="masthead-side right" viewBox="0 0 180 360" aria-hidden="true"><use href="#tavern-spill"/></svg>
             <p class="masthead-presents">DREAM SYNDICATE DIGITAL ASSETS PRESENTS</p>
             <h1 class="wordmark">POLKAHOLE</h1>
             <span class="masthead-banner" id="masthead-banner">100% PURE POLKA POWER</span>
