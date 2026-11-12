@@ -15,8 +15,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polkahole | Official Band Site</title>
-    <meta name="description" content="Official site of Polkahole - the high-energy polka band! Listen to our albums 'Oompa Loompas and Syntax Errors', 'Polkin' the Hole' and 'Whoa Polka!' and join the polka revolution.">
-    <meta name="keywords" content="polka, accordion, Polkahole, band, music, Oompa Loompas and Syntax Errors, folk music">
+    <meta name="description" content="Official site of Polkahole - the 100% artificial, high-energy polka band! Three albums of machine-made oompah: 'Oompa Loompas and Syntax Errors', 'Polkin' the Hole' and 'Whoa Polka!'. Zero humans. Infinite polka.">
+    <meta name="keywords" content="polka, accordion, Polkahole, band, music, AI music, comedy polka, Oompa Loompas and Syntax Errors, folk music">
     <link rel="canonical" href="https://polkahole.ca/">
 
     <!-- Open Graph / Facebook -->
@@ -127,6 +127,89 @@
             --body: 'Lora', Georgia, serif;
         }
 
+        /* ---- seasonal paint jobs (set via data-theme on <html>) ---- */
+        [data-theme="spring"] {
+            --parchment:#F1EFD9; --parchment-deep:#DFDCB6;
+            --green:#4E7A3C; --green-deep:#3C5E2E;
+            --brass:#C9A42E; --brass-light:#E0BF55; --red:#B5556E;
+        }
+        [data-theme="summer"] {
+            --parchment:#F5E9C6; --parchment-deep:#E6D49E;
+            --green:#447A4C; --green-deep:#345E3A;
+            --brass:#D9A431; --brass-light:#EFC055; --red:#B5452A;
+        }
+        [data-theme="autumn"] {
+            --parchment:#F2E3C6; --parchment-deep:#E2CD9F;
+            --green:#5E5A2A; --green-deep:#474512;
+            --brass:#C07A2B; --brass-light:#DD9A47; --red:#9E3D1B;
+        }
+        [data-theme="winter"] {
+            --parchment:#EDEEEC; --parchment-deep:#D8DBD6;
+            --green:#3A5A5A; --green-deep:#2C4646;
+            --brass:#7FA3B8; --brass-light:#A3C2D4; --red:#A32638;
+        }
+        [data-theme="christmas"] {
+            --parchment:#F1EADB; --parchment-deep:#DFD3B8;
+            --green:#2E5339; --green-deep:#23402C;
+            --brass:#C9972E; --brass-light:#E3B458; --red:#A32638;
+        }
+        [data-theme="newyear"] {
+            --parchment:#F0EDE4; --parchment-deep:#DCD6C4;
+            --green:#32415F; --green-deep:#273349;
+            --brass:#D4AF37; --brass-light:#EACB5F; --red:#A03226;
+        }
+        [data-theme="valentines"] {
+            --parchment:#F6E7E2; --parchment-deep:#E8CFC7;
+            --green:#8A3B4C; --green-deep:#6E2C3B;
+            --brass:#C68A4F; --brass-light:#DFA96E; --red:#B03A52;
+        }
+        [data-theme="stpatricks"] {
+            --parchment:#EFEFD8; --parchment-deep:#DCDDB4;
+            --green:#2F6B35; --green-deep:#245228;
+            --brass:#C9972E; --brass-light:#E3B458; --red:#A03226;
+        }
+        [data-theme="easter"] {
+            --parchment:#F5F0E2; --parchment-deep:#E4D9C0;
+            --green:#6B8F4E; --green-deep:#52713B;
+            --brass:#CDA44E; --brass-light:#E6C06E; --red:#B5637F;
+        }
+        [data-theme="canadaday"] {
+            --parchment:#F6F1E8; --parchment-deep:#E6DCC9;
+            --green:#A8262B; --green-deep:#861E22;
+            --brass:#C9972E; --brass-light:#E3B458; --red:#A8262B;
+        }
+        [data-theme="halloween"] {
+            --parchment:#EFE3C2; --parchment-deep:#DFCB9A;
+            --green:#4A3B5C; --green-deep:#352A45;
+            --brass:#C96A1E; --brass-light:#E68A3C; --red:#8E1B1B;
+        }
+        /* oktoberfest keeps the house palette — it's already Oktoberfest in here */
+
+        /* ambient falling bits (snow, leaves, bats, pretzels) */
+        #season-sky span {
+            position: fixed;
+            top: -6vh;
+            z-index: 5;
+            pointer-events: none;
+            opacity: 0;
+            animation: skyfall linear infinite;
+        }
+        @keyframes skyfall {
+            0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+            8%   { opacity: 0.5; }
+            88%  { opacity: 0.5; }
+            100% { transform: translateY(112vh) rotate(300deg); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #season-sky { display: none; }
+        }
+
+        #theme-note {
+            display: none;
+            font-style: italic;
+            margin: 0 0 10px;
+        }
+
         * { box-sizing: border-box; }
 
         html { scroll-behavior: smooth; }
@@ -197,6 +280,27 @@
             outline-offset: 5px;
             padding: 38px 24px 34px;
             background: rgba(255, 250, 238, 0.45);
+            position: relative;
+        }
+        .masthead-stamp {
+            position: absolute;
+            top: -22px;
+            right: -14px;
+            background: var(--parchment);
+            transform: rotate(9deg);
+            font-family: var(--display);
+            font-size: 0.78rem;
+            line-height: 1.35;
+            letter-spacing: 0.08em;
+            color: var(--red);
+            border: 3px double var(--red);
+            padding: 7px 12px;
+            opacity: 0.82;
+        }
+        .masthead-stamp i {
+            font-family: var(--body);
+            font-size: 0.72rem;
+            letter-spacing: 0;
         }
         .masthead-presents {
             font-family: var(--display);
@@ -555,10 +659,91 @@
         #song-list li.playing .track-play-hint { color: var(--brass-light); }
 
         /* ============================================================
-           SHOWS / FAN ZONE / BOOKING
+           THE BAND / FAN ZONE / BOOKING
            ============================================================ */
-        #shows, #fan-zone { text-align: center; }
-        #shows p, #fan-zone p { max-width: 58ch; margin: 0 auto 18px; }
+        #the-band, #fan-zone { text-align: center; }
+        #the-band p, #fan-zone p { max-width: 58ch; margin: 0 auto 18px; }
+        .band-punchline {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--green-deep);
+        }
+
+        /* the gag bill */
+        .stat-bill {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px auto 34px;
+            border-top: 3px double var(--brass);
+            border-bottom: 3px double var(--brass);
+            max-width: 640px;
+        }
+        .stat {
+            flex: 1;
+            min-width: 120px;
+            padding: 18px 10px;
+            border-left: 1px solid var(--parchment-deep);
+        }
+        .stat:first-child { border-left: none; }
+        .stat-num {
+            display: block;
+            font-family: var(--display);
+            font-size: 2.6rem;
+            line-height: 1;
+            color: var(--oak);
+        }
+        .stat:nth-child(3) .stat-num { color: var(--red); }
+        .stat-label {
+            display: block;
+            font-style: italic;
+            color: var(--ink-soft);
+            margin-top: 4px;
+        }
+
+        /* THE POLKA BUTTON */
+        .dare-line { font-style: italic; color: var(--ink-soft); }
+        #polka-button {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: var(--display);
+            color: var(--oak);
+            background: radial-gradient(circle at 35% 30%, var(--brass-light), var(--brass) 55%, #9a6f1d);
+            border: 5px solid var(--oak);
+            box-shadow:
+                0 0 0 3px var(--brass),
+                0 10px 0 rgba(36,22,16,0.9),
+                0 14px 24px rgba(36,22,16,0.3);
+            transition: transform 0.08s ease, box-shadow 0.08s ease;
+        }
+        #polka-button:hover { filter: brightness(1.06); }
+        #polka-button:active {
+            transform: translateY(8px);
+            box-shadow:
+                0 0 0 3px var(--brass),
+                0 2px 0 rgba(36,22,16,0.9),
+                0 4px 10px rgba(36,22,16,0.3);
+        }
+        .polka-button-top { font-size: 0.95rem; letter-spacing: 0.22em; }
+        .polka-button-main { font-size: 1.9rem; line-height: 1.02; letter-spacing: 0.06em; }
+        .polka-button-hint { font-size: 0.85rem; font-style: italic; color: var(--ink-soft); margin-top: 14px; }
+
+        .note-burst {
+            position: fixed;
+            z-index: 1200;
+            pointer-events: none;
+            font-size: 1.5rem;
+            left: 0;
+            top: 0;
+            will-change: transform, opacity;
+        }
 
         .signup-row {
             display: flex;
@@ -659,6 +844,12 @@
            ============================================================ */
         @media (max-width: 640px) {
             .masthead-frame { padding: 26px 14px 24px; }
+            .masthead-stamp {
+                position: static;
+                display: inline-block;
+                margin-bottom: 14px;
+                transform: rotate(-3deg);
+            }
             .album-card.active { gap: 26px; }
             .current-track-info { flex-wrap: wrap; }
             .eq { margin-left: 0; width: 100%; justify-content: center; margin-top: 4px; }
@@ -672,10 +863,11 @@
 
     <header class="masthead">
         <div class="masthead-frame">
+            <span class="masthead-stamp" aria-hidden="true">CERTIFIED<br>ARTIFICIAL OOMPAH<br><i>no humans detected</i></span>
             <p class="masthead-presents">DREAM SYNDICATE DIGITAL ASSETS PRESENTS</p>
             <h1 class="wordmark">POLKAHOLE</h1>
-            <span class="masthead-banner">100% PURE POLKA POWER</span>
-            <p class="masthead-bill">The loudest, fastest, most accordion-heavy band this side of the Danube — <b>three albums</b>, zero apologies, one yellow Beetle.</p>
+            <span class="masthead-banner" id="masthead-banner">100% PURE POLKA POWER</span>
+            <p class="masthead-bill">The loudest, fastest, most accordion-heavy band this side of the Danube — <b>three albums</b>, zero humans, one yellow Beetle.</p>
         </div>
     </header>
 
@@ -830,12 +1022,27 @@
             </div>
         </section>
 
-        <section id="shows" class="bill">
+        <section id="the-band" class="bill">
             <div class="section-head">
                 <div class="orn-rule"><span>★</span></div>
-                <h3>Upcoming Shows</h3>
+                <h3>Meet the Band</h3>
             </div>
-            <p>The garage is rattling, the neighbors are complaining, and the accordion is thirsty for more. We're locked in the Polka-Lab perfecting our craft — no shows on the bill right now. Stay tuned.</p>
+            <p>Here's the thing: there is no band. No tour bus, no drummer sleeping in the van, no lederhosen dry-cleaning bill. Polkahole is 100% certified artificial oompah — every track cooked up in the Polka-Lab by machines that were supposed to be doing spreadsheets.</p>
+            <p class="band-punchline">The accordions aren't real. The polka is.</p>
+
+            <div class="stat-bill">
+                <div class="stat"><span class="stat-num">3</span><span class="stat-label">albums</span></div>
+                <div class="stat"><span class="stat-num">36</span><span class="stat-label">tracks</span></div>
+                <div class="stat"><span class="stat-num">0</span><span class="stat-label">humans</span></div>
+                <div class="stat"><span class="stat-num">∞</span><span class="stat-label">polka</span></div>
+            </div>
+
+            <p class="dare-line">Don't believe us? See for yourself.</p>
+            <button id="polka-button" aria-label="Play a random Polkahole track">
+                <span class="polka-button-top">HIT THE</span>
+                <span class="polka-button-main">POLKA<br>BUTTON</span>
+            </button>
+            <p class="polka-button-hint">One random track. No refunds.</p>
         </section>
 
         <section id="fan-zone" class="bill">
@@ -857,6 +1064,7 @@
 
     <footer>
         <div class="orn-rule"><span>★</span></div>
+        <p id="theme-note"></p>
         <p>&copy; 2026 Polkahole. All rights reserved. Dream Syndicate Digital Assets &lt;3</p>
     </footer>
 
@@ -1135,6 +1343,49 @@
             });
         });
 
+        // THE POLKA BUTTON — one random track, no refunds
+        const polkaButton = document.getElementById('polka-button');
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function burstNotes(sourceEl) {
+            if (reducedMotion.matches) return;
+            const rect = sourceEl.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const glyphs = ['🎵', '🎶', '🪗', '🎺', '★'];
+            for (let i = 0; i < 18; i++) {
+                const note = document.createElement('span');
+                note.className = 'note-burst';
+                note.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+                note.style.transform = `translate(${cx}px, ${cy}px)`;
+                document.body.appendChild(note);
+                const angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.5;
+                const dist = 90 + Math.random() * 130;
+                const dx = Math.cos(angle) * dist;
+                const dy = Math.sin(angle) * dist - 60;
+                const spin = (Math.random() - 0.5) * 540;
+                note.animate([
+                    { transform: `translate(${cx}px, ${cy}px) rotate(0deg) scale(1)`, opacity: 1 },
+                    { transform: `translate(${cx + dx}px, ${cy + dy}px) rotate(${spin}deg) scale(0.6)`, opacity: 0 }
+                ], {
+                    duration: 900 + Math.random() * 500,
+                    easing: 'cubic-bezier(0.2, 0.8, 0.4, 1)'
+                }).onfinish = () => note.remove();
+            }
+        }
+
+        polkaButton.addEventListener('click', () => {
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * songs.length);
+            } while (songs.length > 1 && idx === currentSongIndex);
+            burstNotes(polkaButton);
+            loadSong(idx);
+            setTimeout(() => {
+                document.getElementById('music').scrollIntoView();
+            }, 650);
+        });
+
         // Initial render
         renderSongList();
 
@@ -1149,6 +1400,95 @@
                 }
             }
         });
+
+        // ============================================================
+        // SEASONAL PAINT JOBS — the site redecorates itself
+        // Holidays win over seasons. Preview any skin with ?theme=key
+        // ============================================================
+        const THEMES = {
+            spring:     { banner: 'SPRING-LOADED POLKA POWER', orn: '❀', label: 'Spring Edition', sky: ['❀'], skyCount: 8 },
+            summer:     { banner: "SUN'S OUT, TUBAS OUT",      orn: '☀', label: 'Summer Edition', sky: [] },
+            autumn:     { banner: 'HARVEST-GRADE POLKA POWER', orn: '🍂', label: 'Harvest Edition', sky: ['🍂', '🍁'], skyCount: 12 },
+            winter:     { banner: 'COLD HANDS, HOT BRASS',     orn: '❄', label: 'Winter Edition', sky: ['❄'], skyCount: 10 },
+            christmas:  { banner: 'JINGLE ALL THE POLKA',      orn: '❄', label: 'Christmas Edition', sky: ['❄', '❅'], skyCount: 16 },
+            newyear:    { banner: 'NEW YEAR, SAME POLKA',      orn: '✦', label: "New Year's Edition", sky: ['✦', '🎊'], skyCount: 12 },
+            valentines: { banner: '100% PURE POLKA LOVE',      orn: '♥', label: "Valentine's Edition", sky: ['♥'], skyCount: 10 },
+            stpatricks: { banner: "SHAMROCKIN' POLKA POWER",   orn: '☘', label: "St. Patrick's Edition", sky: ['☘'], skyCount: 12 },
+            easter:     { banner: 'HOPPY POLKA POWER',         orn: '✿', label: 'Easter Edition', sky: [] },
+            canadaday:  { banner: 'TRUE NORTH POLKA POWER',    orn: '🍁', label: 'Canada Day Edition', sky: ['🍁'], skyCount: 12 },
+            oktoberfest:{ banner: 'ES IST OKTOBERFEST, BABY',  orn: '🥨', label: 'Oktoberfest Edition', sky: ['🥨'], skyCount: 10 },
+            halloween:  { banner: 'SPOOKY POLKA POWER',        orn: '🎃', label: 'Halloween Edition', sky: ['🦇', '🎃'], skyCount: 12 }
+        };
+
+        function easterSunday(year) {
+            // Anonymous Gregorian computus
+            const a = year % 19, b = Math.floor(year / 100), c = year % 100;
+            const d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+            const g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+            const i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7;
+            const m = Math.floor((a + 11 * h + 22 * l) / 451);
+            const month = Math.floor((h + l - 7 * m + 114) / 31);
+            const day = ((h + l - 7 * m + 114) % 31) + 1;
+            return new Date(year, month - 1, day);
+        }
+
+        function resolveTheme(now) {
+            const m = now.getMonth() + 1, d = now.getDate();
+            const md = m * 100 + d;
+            if (md >= 1201 && md <= 1226) return 'christmas';
+            if (md >= 1227 || md <= 105) return 'newyear';
+            if (md >= 207 && md <= 214) return 'valentines';
+            if (md >= 310 && md <= 317) return 'stpatricks';
+            const easter = easterSunday(now.getFullYear());
+            const diffDays = Math.round((now - easter) / 86400000);
+            if (diffDays >= -6 && diffDays <= 1) return 'easter';
+            if (md >= 625 && md <= 701) return 'canadaday';
+            if (md >= 915 && md <= 1005) return 'oktoberfest';
+            if (md >= 1015 && md <= 1031) return 'halloween';
+            if (md >= 320 && md <= 620) return 'spring';
+            if (md >= 621 && md <= 921) return 'summer';
+            if (md >= 922 && md <= 1220) return 'autumn';
+            return 'winter';
+        }
+
+        function spawnSky(theme) {
+            if (!theme.sky || !theme.sky.length || reducedMotion.matches) return;
+            const sky = document.createElement('div');
+            sky.id = 'season-sky';
+            sky.setAttribute('aria-hidden', 'true');
+            const count = theme.skyCount || 10;
+            for (let i = 0; i < count; i++) {
+                const bit = document.createElement('span');
+                bit.textContent = theme.sky[Math.floor(Math.random() * theme.sky.length)];
+                bit.style.left = `${Math.random() * 98}%`;
+                bit.style.fontSize = `${0.8 + Math.random() * 0.7}rem`;
+                bit.style.animationDuration = `${9 + Math.random() * 9}s`;
+                bit.style.animationDelay = `${Math.random() * 14}s`;
+                sky.appendChild(bit);
+            }
+            document.body.appendChild(sky);
+        }
+
+        function applyTheme() {
+            const params = new URLSearchParams(window.location.search);
+            const forced = params.get('theme');
+            const key = (forced && (THEMES[forced] || forced === 'default'))
+                ? forced
+                : resolveTheme(new Date());
+            if (key === 'default' || !THEMES[key]) return;
+            const theme = THEMES[key];
+            document.documentElement.setAttribute('data-theme', key);
+            document.getElementById('masthead-banner').textContent = theme.banner;
+            document.querySelectorAll('.orn-rule span').forEach(s => {
+                s.textContent = s.textContent.replaceAll('★', theme.orn);
+            });
+            const note = document.getElementById('theme-note');
+            note.textContent = `Seasonal paint job: ${theme.label}. The site redecorates itself — the band still doesn't exist.`;
+            note.style.display = 'block';
+            spawnSky(theme);
+        }
+
+        applyTheme();
     </script>
 
 </body>
