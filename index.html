@@ -237,81 +237,6 @@
         .masthead-bill b { color: var(--red); font-style: normal; }
 
         /* ============================================================
-           NEW RELEASE — the summit bill
-           ============================================================ */
-        .summit-release {
-            padding: 56px 20px;
-            border-bottom: 6px double var(--oak);
-            background: linear-gradient(180deg, rgba(65,96,60,0.06), transparent 40%);
-        }
-        .summit-inner {
-            max-width: 1100px;
-            margin: auto;
-            display: flex;
-            gap: 48px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .summit-text { flex: 1.2; min-width: 320px; }
-        .summit-badge {
-            display: inline-block;
-            font-family: var(--display);
-            font-size: 1.05rem;
-            letter-spacing: 0.22em;
-            color: var(--parchment);
-            background: var(--red);
-            padding: 5px 18px;
-            transform: rotate(-1.5deg);
-            margin-bottom: 14px;
-        }
-        .summit-text h2 { margin-bottom: 10px; }
-        .summit-text p { margin: 0 0 16px; }
-        .summit-image { flex: 1; min-width: 300px; max-width: 480px; }
-        .summit-image img {
-            width: 100%;
-            border: 3px solid var(--oak);
-            outline: 1px solid var(--oak);
-            outline-offset: 4px;
-            box-shadow: 10px 10px 0 rgba(36,22,16,0.14);
-        }
-
-        .incident-box {
-            border: 2px solid var(--green-deep);
-            background: rgba(255,250,238,0.6);
-            padding: 18px 22px;
-            margin: 22px 0;
-            position: relative;
-        }
-        .incident-box::after {
-            content: "FILED";
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            font-family: var(--display);
-            font-size: 0.85rem;
-            letter-spacing: 0.14em;
-            color: var(--red);
-            border: 2px solid var(--red);
-            padding: 1px 8px;
-            transform: rotate(6deg);
-            opacity: 0.8;
-        }
-        .incident-box h3 { font-size: 1.25rem; margin-bottom: 8px; color: var(--green-deep); }
-        .incident-box ul { margin: 0; padding-left: 4px; list-style: none; }
-        .incident-box li { margin: 3px 0; }
-
-        .summit-tagline {
-            font-style: italic;
-            color: var(--ink-soft);
-        }
-
-        .summit-text audio {
-            width: 100%;
-            margin: 6px 0 18px;
-        }
-
-        /* ============================================================
            BUTTONS
            ============================================================ */
         .btn {
@@ -480,15 +405,6 @@
         }
         .player-shell .section-head h3 { color: var(--brass-light); }
         .player-shell .orn-rule { color: var(--brass); }
-        .safety-notice {
-            max-width: 56ch;
-            margin: 0 auto 24px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-style: italic;
-            color: rgba(242,231,206,0.55);
-        }
-
         #song-search {
             display: block;
             width: 100%;
@@ -743,7 +659,6 @@
            ============================================================ */
         @media (max-width: 640px) {
             .masthead-frame { padding: 26px 14px 24px; }
-            .summit-inner { flex-direction: column; }
             .album-card.active { gap: 26px; }
             .current-track-info { flex-wrap: wrap; }
             .eq { margin-left: 0; width: 100%; justify-content: center; margin-top: 4px; }
@@ -763,54 +678,6 @@
             <p class="masthead-bill">The loudest, fastest, most accordion-heavy band this side of the Danube — <b>three albums</b>, zero apologies, one yellow Beetle.</p>
         </div>
     </header>
-
-    <section class="summit-release">
-        <div class="summit-inner">
-
-            <div class="summit-text">
-                <span class="summit-badge">NEW RELEASE</span>
-                <h2>The Summit Is Attained</h2>
-
-                <p>
-                    Some guy claiming to be the <strong>"System Operator"</strong>
-                    keeps clogging our pipes with bio-hack stacks, edible-powered
-                    immune system theories, and explanations that somehow make
-                    less sense the longer they go on.
-                </p>
-
-                <p>Naturally, we turned the entire incident into a <strong>polka banger</strong>.</p>
-
-                <div class="incident-box">
-                    <h3>Polkahole Incident Report #137</h3>
-                    <ul>
-                        <li>🍃 Edible consumed</li>
-                        <li>🧬 Bio-hack stack deployed</li>
-                        <li>⚙️ Pipes interfered with</li>
-                        <li>📈 Summit reportedly attained</li>
-                        <li>🪗 Accordions activated</li>
-                    </ul>
-                </div>
-
-                <p class="summit-tagline">
-                    "This should absolutely become a song." — Polkahole Safety Committee
-                </p>
-
-                <audio controls preload="none">
-                    <source src="songs/unreleased/The_Summit_Is_Attained.mp3" type="audio/mpeg">
-                </audio>
-
-                <div>
-                    <a href="songs/unreleased/The_Summit_Is_Attained.mp3" download class="btn">Download the track</a>
-                </div>
-            </div>
-
-            <div class="summit-image">
-                <img src="Gemini_Generated_Image_p2v6kep2v6kep2v6-clean.png"
-                     alt="The Summit Is Attained cover art" loading="lazy">
-            </div>
-
-        </div>
-    </section>
 
     <main>
         <section id="welcome" class="bill">
@@ -925,13 +792,6 @@
                     <div class="orn-rule"><span>🪗</span></div>
                     <h3>The Jukebox</h3>
                 </div>
-
-                <p class="safety-notice">
-                    Polkahole Safety Notice #137: do not operate heavy accordions,
-                    industrial pipe systems, experimental bio-hack stacks, alpine
-                    ascension equipment, or municipal tuba infrastructure while
-                    experiencing spontaneous summit attainment.
-                </p>
 
                 <input type="text" id="song-search" placeholder="Search the songbook…" aria-label="Search songs" />
 
