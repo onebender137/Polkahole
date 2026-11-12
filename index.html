@@ -389,72 +389,56 @@
         }
 
         /* ============================================================
-           ALBUMS — the record bin
+           ALBUMS — pick your poison
            ============================================================ */
-        .album-picker {
+        .album-grid {
             display: flex;
             justify-content: center;
-            gap: 22px;
+            gap: 36px;
             flex-wrap: wrap;
-            margin-bottom: 34px;
         }
-        .album-thumb {
-            width: 128px;
-            padding: 0;
-            border: 3px solid var(--oak);
-            background: none;
-            cursor: pointer;
-            filter: saturate(0.25) opacity(0.75);
-            transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+        .album-tile {
+            flex: 1;
+            min-width: 250px;
+            max-width: 330px;
+            text-align: center;
         }
-        .album-thumb img { display: block; width: 100%; }
-        .album-thumb:hover { filter: saturate(1) opacity(1); transform: translateY(-3px); }
-        .album-thumb.active {
-            filter: saturate(1) opacity(1);
-            transform: translateY(-3px);
-            box-shadow: 0 0 0 3px var(--parchment), 0 0 0 6px var(--brass);
-        }
-
-        .album-card { display: none; }
-        .album-card.active {
-            display: flex;
-            gap: 42px;
-            align-items: flex-start;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: cardIn 0.35s ease;
-        }
-        @keyframes cardIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .album-cover-col { flex: 1; min-width: 290px; max-width: 460px; text-align: center; }
-        .album-cover-col .cd-cover {
+        .album-tile .cd-cover {
             width: 100%;
             border: 3px solid var(--oak);
             outline: 1px solid var(--oak);
             outline-offset: 4px;
-            box-shadow: 10px 10px 0 rgba(36,22,16,0.14);
+            box-shadow: 8px 8px 0 rgba(36,22,16,0.14);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
-        .album-cover-col .blurb { font-style: italic; color: var(--ink-soft); margin: 18px 0 16px; }
-
-        .album-tracks-col { flex: 1; min-width: 290px; max-width: 480px; }
-        .album-tracks-col h4 {
+        .album-tile:hover .cd-cover {
+            transform: translateY(-4px);
+            box-shadow: 10px 12px 0 rgba(36,22,16,0.18);
+        }
+        .album-tile h4 {
             font-family: var(--display);
             font-weight: 400;
-            font-size: 1.8rem;
+            font-size: 1.45rem;
             letter-spacing: 0.04em;
             color: var(--green-deep);
-            margin: 0 0 4px;
-            text-align: center;
+            margin: 18px 0 2px;
         }
-        .setlist-label {
-            text-align: center;
+        .album-tile .blurb {
             font-style: italic;
             color: var(--ink-soft);
             font-size: 0.95rem;
             margin: 0 0 14px;
+            min-height: 2.6em;
         }
+        .zip-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--ink-soft);
+            text-decoration: underline dotted;
+        }
+        .zip-link:hover { color: var(--green-deep); }
 
         /* setlist — beer-hall menu with dotted leaders */
         .tracklist { list-style: none; margin: 0; padding: 0; }
@@ -509,20 +493,16 @@
         }
         .player-shell .section-head h3 { color: var(--brass-light); }
         .player-shell .orn-rule { color: var(--brass); }
-        #song-search {
-            display: block;
+        /* the stage — low-poly oompah trio */
+        #band-stage {
             width: 100%;
-            max-width: 520px;
-            margin: 0 auto 26px;
-            padding: 11px 16px;
-            font-family: var(--body);
-            font-size: 1rem;
-            color: var(--ink);
-            background: var(--parchment);
+            height: 240px;
+            margin-bottom: 18px;
             border: 2px solid var(--brass);
-            border-radius: 0;
+            background: #1a0f0a;
+            overflow: hidden;
         }
-        #song-search::placeholder { color: var(--ink-soft); font-style: italic; }
+        #band-stage canvas { display: block; width: 100%; height: 100%; }
 
         #player-ui {
             max-width: 640px;
@@ -559,31 +539,7 @@
             color: rgba(242,231,206,0.65);
         }
 
-        /* EQ bars — animate only while playing */
-        .eq {
-            display: inline-flex;
-            align-items: flex-end;
-            gap: 3px;
-            height: 18px;
-            margin-left: auto;
-            flex-shrink: 0;
-        }
-        .eq span {
-            width: 4px;
-            height: 4px;
-            background: var(--brass);
-        }
-        .playing .eq span { animation: eqBounce 0.9s infinite ease-in-out; }
-        .playing .eq span:nth-child(2) { animation-delay: 0.15s; }
-        .playing .eq span:nth-child(3) { animation-delay: 0.3s; }
-        .playing .eq span:nth-child(4) { animation-delay: 0.45s; }
-        @keyframes eqBounce {
-            0%, 100% { height: 4px; }
-            50% { height: 18px; }
-        }
         @media (prefers-reduced-motion: reduce) {
-            .playing .eq span { animation: none; height: 12px; }
-            .album-card.active { animation: none; }
             html { scroll-behavior: auto; }
         }
 
@@ -647,16 +603,172 @@
             border: 2px solid var(--oak);
         }
 
-        /* full song list inside jukebox */
-        #song-list { max-width: 640px; margin: 0 auto; }
-        #song-list li { border-bottom-color: rgba(242,231,206,0.15); }
-        #song-list li:hover { background: rgba(200,146,47,0.18); }
-        #song-list li.playing { background: rgba(200,146,47,0.22); }
-        #song-list .track-title { color: var(--parchment); }
-        #song-list li.playing .track-title { color: var(--brass-light); }
-        #song-list .track-leader { border-bottom-color: rgba(242,231,206,0.25); }
-        #song-list .track-play-hint { color: rgba(242,231,206,0.6); }
-        #song-list li.playing .track-play-hint { color: var(--brass-light); }
+        /* ============================================================
+           DAS SONGBOOK — a stack of menu papers with flippable pages
+           ============================================================ */
+        .songbook-head {
+            text-align: center;
+            margin: 34px 0 6px;
+        }
+        .songbook-head h4 {
+            font-family: var(--display);
+            font-weight: 400;
+            font-size: 1.7rem;
+            letter-spacing: 0.06em;
+            color: var(--brass-light);
+            margin: 0;
+        }
+        .songbook-hint {
+            text-align: center;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: rgba(242,231,206,0.6);
+            margin: 2px 0 22px;
+        }
+        .songbook {
+            position: relative;
+            max-width: 520px;
+            height: 660px;
+            margin: 0 auto;
+            perspective: 1800px;
+        }
+        .sheet-edge {
+            position: absolute;
+            inset: 0;
+            background: #E8DCBE;
+            border: 1px solid rgba(36,22,16,0.35);
+        }
+        .sheet-edge:nth-child(1) { transform: rotate(1.6deg) translate(5px, 4px); }
+        .sheet-edge:nth-child(2) { transform: rotate(-1.2deg) translate(-4px, 2px); }
+
+        .paper {
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.3, 1), opacity 0.25s ease 0.55s;
+        }
+        .paper.flipped {
+            transform: rotateY(-180deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .page-front, .page-back {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            background: #FBF5E4;
+            border: 2px solid var(--oak);
+            box-shadow: 0 0 0 1px #FBF5E4, 4px 5px 14px rgba(36,22,16,0.35);
+            color: var(--ink);
+            overflow: hidden;
+        }
+        .page-back { transform: rotateY(180deg); }
+        .page-inner {
+            position: absolute;
+            inset: 10px;
+            border: 1px solid var(--brass);
+            padding: 20px 22px 14px;
+            display: flex;
+            flex-direction: column;
+        }
+        .menu-kicker {
+            text-align: center;
+            font-family: var(--display);
+            font-size: 0.85rem;
+            letter-spacing: 0.26em;
+            color: var(--red);
+            margin: 0;
+        }
+        .menu-title {
+            text-align: center;
+            font-family: var(--display);
+            font-weight: 400;
+            font-size: 1.55rem;
+            letter-spacing: 0.04em;
+            color: var(--green-deep);
+            margin: 2px 0 0;
+        }
+        .menu-rule {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--brass);
+            margin: 8px 0 10px;
+        }
+        .menu-rule::before, .menu-rule::after {
+            content: "";
+            flex: 1;
+            border-top: 1px solid currentColor;
+        }
+        .page-front .tracklist { flex: 1; }
+        .page-front .tracklist li { padding: 5px 2px; }
+        .page-front .track-title { font-size: 0.97rem; }
+        .track-price {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--ink-soft);
+            white-space: nowrap;
+        }
+        .tracklist li.playing .track-price { color: var(--green-deep); }
+        .menu-footer {
+            text-align: center;
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--ink-soft);
+            margin: 8px 0 0;
+        }
+
+        /* themed back of each page */
+        .page-back .page-inner {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
+        }
+        .page-back-mark { font-size: 3.4rem; line-height: 1; }
+        .page-back-word {
+            font-family: var(--display);
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+            color: var(--green-deep);
+            margin: 0;
+        }
+        .page-back-sub { font-style: italic; color: var(--ink-soft); margin: 0; }
+
+        /* menu tabs */
+        .songbook-tab {
+            position: absolute;
+            right: -40px;
+            width: 40px;
+            padding: 12px 0;
+            font-family: var(--display);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-align: center;
+            background: var(--brass);
+            color: var(--oak);
+            border: 2px solid var(--oak);
+            border-left: none;
+            cursor: pointer;
+            z-index: 40;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0;
+        }
+        .songbook-tab:hover { background: var(--brass-light); }
+        .songbook-tab.active { background: var(--parchment); }
+        .songbook-tab:nth-of-type(1) { top: 36px; }
+        .songbook-tab:nth-of-type(2) { top: 128px; }
+        .songbook-tab:nth-of-type(3) { top: 220px; }
+
+        .songbook-nav {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 24px;
+        }
+        .songbook-nav .btn { font-size: 1rem; padding: 8px 18px; }
 
         /* ============================================================
            THE BAND / FAN ZONE / BOOKING
@@ -850,10 +962,22 @@
                 margin-bottom: 14px;
                 transform: rotate(-3deg);
             }
-            .album-card.active { gap: 26px; }
             .current-track-info { flex-wrap: wrap; }
-            .eq { margin-left: 0; width: 100%; justify-content: center; margin-top: 4px; }
             .transport .btn { font-size: 0.95rem; padding: 8px 14px; }
+            .songbook { height: 620px; }
+            .songbook-tab {
+                writing-mode: horizontal-tb;
+                width: auto;
+                padding: 4px 14px;
+                border-left: 2px solid var(--oak);
+                border-bottom: none;
+                right: auto;
+            }
+            .songbook-tab:nth-of-type(1) { top: -34px; left: 8px; }
+            .songbook-tab:nth-of-type(2) { top: -34px; left: 90px; }
+            .songbook-tab:nth-of-type(3) { top: -34px; left: 172px; }
+            .songbook { margin-top: 40px; }
+            #band-stage { height: 190px; }
             section.bill { padding: 40px 0; }
             .player-shell { padding: 26px 16px 22px; }
         }
@@ -887,93 +1011,27 @@
                 <h2>The Albums</h2>
             </div>
 
-            <div class="album-picker" role="tablist" aria-label="Choose an album">
-                <button class="album-thumb active" data-album="0" role="tab" aria-selected="true" aria-label="Oompa Loompas and Syntax Errors">
-                    <img src="Gemini_Generated_Image_tevx5btevx5btevx.webp" alt="" loading="lazy">
-                </button>
-                <button class="album-thumb" data-album="1" role="tab" aria-selected="false" aria-label="Polkin' the Hole">
-                    <img src="Gemini_Generated_Image_6sl51i6sl51i6sl5.webp" alt="" loading="lazy">
-                </button>
-                <button class="album-thumb" data-album="2" role="tab" aria-selected="false" aria-label="Whoa Polka!">
-                    <img src="Whoa_Polka_Art.webp" alt="" loading="lazy">
-                </button>
-            </div>
-
-            <div class="album-card active" id="album-0">
-                <div class="album-cover-col">
+            <div class="album-grid">
+                <div class="album-tile">
                     <img src="Gemini_Generated_Image_tevx5btevx5btevx.webp" alt="Oompa Loompas and Syntax Errors CD cover art" class="cd-cover">
-                    <p class="blurb">The debut. High-speed polka meets low-level bugs.</p>
-                    <a href="Oompa_Loompas_and_Syntax_Errors.zip" class="btn btn-brass">Download album (ZIP)</a>
-                </div>
-                <div class="album-tracks-col">
                     <h4>Oompa Loompas and Syntax Errors</h4>
-                    <p class="setlist-label">Click a track to play it</p>
-                    <ul class="tracklist">
-                        <li data-song-index="0"><span class="track-num">1</span><span class="track-title">Boots on the Floorboards</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="1"><span class="track-num">2</span><span class="track-title">Breaded Soldier on the Line</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="2"><span class="track-num">3</span><span class="track-title">Cardboard Armor</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="3"><span class="track-num">4</span><span class="track-title">Dix heures à la shop</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="4"><span class="track-num">5</span><span class="track-title">Don't Mind My Brains</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="5"><span class="track-num">6</span><span class="track-title">Lose Your Shoes</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="6"><span class="track-num">7</span><span class="track-title">Melting Down the Steel</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="7"><span class="track-num">8</span><span class="track-title">Pepperoni Ledger</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="8"><span class="track-num">9</span><span class="track-title">Polka Your Eyes Out</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="9"><span class="track-num">10</span><span class="track-title">Pot of Gold in the Pantry</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="10"><span class="track-num">11</span><span class="track-title">Puddle of Butter</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="11"><span class="track-num">12</span><span class="track-title">Punchline Before the Joke</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                    </ul>
+                    <p class="blurb">The debut. High-speed polka meets low-level bugs.</p>
+                    <button class="btn play-album-btn" data-album="0">▶ Play this album</button><br>
+                    <a href="Oompa_Loompas_and_Syntax_Errors.zip" class="zip-link">download the ZIP</a>
                 </div>
-            </div>
-
-            <div class="album-card" id="album-1">
-                <div class="album-cover-col">
+                <div class="album-tile">
                     <img src="Gemini_Generated_Image_6sl51i6sl51i6sl5.webp" alt="Polkin' the Hole CD cover art" class="cd-cover" loading="lazy">
-                    <p class="blurb">Even more accordion. Even more power.</p>
-                    <a href="Polkin_the_Hole.zip" class="btn btn-brass">Download album (ZIP)</a>
-                </div>
-                <div class="album-tracks-col">
                     <h4>Polkin' the Hole</h4>
-                    <p class="setlist-label">Click a track to play it</p>
-                    <ul class="tracklist">
-                        <li data-song-index="12"><span class="track-num">1</span><span class="track-title">Rafters Ring</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="13"><span class="track-num">2</span><span class="track-title">Raise Your Glasses High</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="14"><span class="track-num">3</span><span class="track-title">Sepp's Velvet Stall</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="15"><span class="track-num">4</span><span class="track-title">Sizzle and Steam</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="16"><span class="track-num">5</span><span class="track-title">Smile Like a Champion</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="17"><span class="track-num">6</span><span class="track-title">Spin Till You're Blind</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="18"><span class="track-num">7</span><span class="track-title">Sudo Please</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="19"><span class="track-num">8</span><span class="track-title">Ten Wooden Soldiers</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="20"><span class="track-num">9</span><span class="track-title">Terminal Tavern</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="21"><span class="track-num">10</span><span class="track-title">The Brine Room Giggle</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="22"><span class="track-num">11</span><span class="track-title">The Kielbasa Slide</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="23"><span class="track-num">12</span><span class="track-title">The Tortoise and the Ping</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="24"><span class="track-num">13</span><span class="track-title">Thunder Down the Lane</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                    </ul>
+                    <p class="blurb">Even more accordion. Even more power.</p>
+                    <button class="btn play-album-btn" data-album="1">▶ Play this album</button><br>
+                    <a href="Polkin_the_Hole.zip" class="zip-link">download the ZIP</a>
                 </div>
-            </div>
-
-            <div class="album-card" id="album-2">
-                <div class="album-cover-col">
+                <div class="album-tile">
                     <img src="Whoa_Polka_Art.webp" alt="Whoa Polka! CD cover art" class="cd-cover" loading="lazy">
-                    <p class="blurb">Hold on to your hats. Eleven tracks of pure polka madness.</p>
-                    <a href="Whoa_Polka.zip" class="btn btn-brass">Download album (ZIP)</a>
-                </div>
-                <div class="album-tracks-col">
                     <h4>Whoa Polka!</h4>
-                    <p class="setlist-label">Click a track to play it</p>
-                    <ul class="tracklist">
-                        <li data-song-index="25"><span class="track-num">1</span><span class="track-title">Clover on My Sunday Best</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="26"><span class="track-num">2</span><span class="track-title">The Brakeman's Morning Call</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="27"><span class="track-num">3</span><span class="track-title">Das Pumpwerk</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="28"><span class="track-num">4</span><span class="track-title">The Tuba's Happy Bark</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="29"><span class="track-num">5</span><span class="track-title">Patrick's Slack Jaw</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="30"><span class="track-num">6</span><span class="track-title">Don't Mind My Brains</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="31"><span class="track-num">7</span><span class="track-title">High Ridge Revelry</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="32"><span class="track-num">8</span><span class="track-title">Slice of Heavy Fate</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="33"><span class="track-num">9</span><span class="track-title">The Rooster's Falsetto</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="34"><span class="track-num">10</span><span class="track-title">The Polka Man Prevails</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                        <li data-song-index="35"><span class="track-num">11</span><span class="track-title">Left My Laces Behind</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span></li>
-                    </ul>
+                    <p class="blurb">Hold on to your hats. Eleven tracks of pure polka madness.</p>
+                    <button class="btn play-album-btn" data-album="2">▶ Play this album</button><br>
+                    <a href="Whoa_Polka.zip" class="zip-link">download the ZIP</a>
                 </div>
             </div>
         </section>
@@ -985,16 +1043,14 @@
                     <h3>The Jukebox</h3>
                 </div>
 
-                <input type="text" id="song-search" placeholder="Search the songbook…" aria-label="Search songs" />
-
                 <div id="player-ui">
+                    <div id="band-stage" aria-hidden="true"></div>
                     <div class="current-track-info">
                         <img src="Gemini_Generated_Image_tevx5btevx5btevx.webp" alt="Album art" id="player-album-art">
                         <div>
                             <h4 id="current-song-title">Select a song</h4>
                             <p id="current-song-artist">Polkahole</p>
                         </div>
-                        <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                     </div>
 
                     <div class="transport">
@@ -1016,9 +1072,17 @@
                     </div>
                 </div>
 
-                <ul id="song-list" class="tracklist">
-                    <!-- Songs populated by JavaScript -->
-                </ul>
+                <div class="songbook-head"><h4>Das Songbook</h4></div>
+                <p class="songbook-hint">Flip through the menu — order a track to hear it.</p>
+                <div class="songbook" id="songbook">
+                    <div class="sheet-edge"></div>
+                    <div class="sheet-edge"></div>
+                    <!-- Menu pages and tabs populated by JavaScript -->
+                </div>
+                <div class="songbook-nav">
+                    <button class="btn" id="page-prev">◀ Previous page</button>
+                    <button class="btn" id="page-next">Next page ▶</button>
+                </div>
             </div>
         </section>
 
@@ -1082,6 +1146,7 @@
         </div>
     </div>
 
+    <script src="three.min.js"></script>
     <script>
         const songs = [
             { title: "Boots on the Floorboards", file: "songs/Boots_on_the_Floorboards.mp3", albumArt: "Gemini_Generated_Image_tevx5btevx5btevx.webp" },
@@ -1125,8 +1190,13 @@
         let currentSongIndex = -1;
         const audio = new Audio();
 
-        const songList = document.getElementById('song-list');
-        const songSearch = document.getElementById('song-search');
+        const ALBUMS = [
+            { title: "Oompa Loompas and Syntax Errors", art: "Gemini_Generated_Image_tevx5btevx5btevx.webp", start: 0,  count: 12 },
+            { title: "Polkin' the Hole",                art: "Gemini_Generated_Image_6sl51i6sl51i6sl5.webp", start: 12, count: 13 },
+            { title: "Whoa Polka!",                     art: "Whoa_Polka_Art.webp",                          start: 25, count: 11 }
+        ];
+        const albumOfSong = (i) => ALBUMS.findIndex(a => i >= a.start && i < a.start + a.count);
+
         const playPauseBtn = document.getElementById('play-pause-btn');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
@@ -1198,9 +1268,38 @@
 
             markPlaying(index);
             updateMetadata(index);
+            if (typeof goToPage === 'function') goToPage(albumOfSong(index));
+            initAnalyser();
 
             audio.play();
             setPlayingState(true);
+        }
+
+        // WebAudio analyser — feeds the band. Lazy: created on first
+        // user-triggered play so autoplay policy is satisfied.
+        let analyser = null, freqData = null;
+        function initAnalyser() {
+            if (analyser !== null) return;
+            try {
+                const actx = new (window.AudioContext || window.webkitAudioContext)();
+                const source = actx.createMediaElementSource(audio);
+                analyser = actx.createAnalyser();
+                analyser.fftSize = 128;
+                source.connect(analyser);
+                analyser.connect(actx.destination);
+                freqData = new Uint8Array(analyser.frequencyBinCount);
+                if (actx.state === 'suspended') actx.resume();
+            } catch (e) {
+                analyser = false; // tried and failed — band falls back to timed bounce
+            }
+        }
+        function audioLevel() {
+            if (!analyser) return audio.paused ? 0 : 0.5 + 0.3 * Math.sin(performance.now() / 180);
+            analyser.getByteFrequencyData(freqData);
+            let sum = 0;
+            const bins = 24;
+            for (let i = 0; i < bins; i++) sum += freqData[i];
+            return sum / (bins * 255);
         }
 
         function openShareModal() {
@@ -1244,20 +1343,6 @@
                 shareModal.style.display = 'none';
             }
         });
-
-        function renderSongList(filter = '') {
-            songList.innerHTML = '';
-            songs.forEach((song, index) => {
-                if (song.title.toLowerCase().includes(filter.toLowerCase())) {
-                    const li = document.createElement('li');
-                    li.setAttribute('data-song-index', index);
-                    li.innerHTML = `<span class="track-num">${index + 1}</span><span class="track-title">${song.title}</span><span class="track-leader"></span><span class="track-play-hint">PLAY</span>`;
-                    if (index === currentSongIndex) li.classList.add('playing');
-                    li.addEventListener('click', () => loadSong(index));
-                    songList.appendChild(li);
-                }
-            });
-        }
 
         playPauseBtn.addEventListener('click', () => {
             if (audio.paused) {
@@ -1313,35 +1398,92 @@
             audio.volume = volumeSlider.value;
         });
 
-        songSearch.addEventListener('input', (e) => {
-            renderSongList(e.target.value);
-        });
-
-        // Album picker
-        const albumThumbs = document.querySelectorAll('.album-thumb');
-        const albumCards = document.querySelectorAll('.album-card');
-
-        albumThumbs.forEach(thumb => {
-            thumb.addEventListener('click', () => {
-                const albumId = thumb.getAttribute('data-album');
-                albumThumbs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                thumb.classList.add('active');
-                thumb.setAttribute('aria-selected', 'true');
-                albumCards.forEach(card => card.classList.remove('active'));
-                document.getElementById(`album-${albumId}`).classList.add('active');
+        // Play-album buttons — the front door
+        document.querySelectorAll('.play-album-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const album = ALBUMS[parseInt(btn.getAttribute('data-album'))];
+                loadSong(album.start);
+                setTimeout(() => document.getElementById('music').scrollIntoView(), 400);
             });
         });
 
-        // Album card track clicks
-        document.querySelectorAll('.album-card .tracklist li').forEach((li) => {
-            li.addEventListener('click', () => {
-                const songIndex = parseInt(li.getAttribute('data-song-index'));
-                loadSong(songIndex);
+        // ============================================================
+        // DAS SONGBOOK — stacked menu papers, one album per page
+        // ============================================================
+        const songbook = document.getElementById('songbook');
+        let currentPage = 0;
+
+        function trackPrice(i) {
+            if (i % 11 === 7) return 'market price';
+            if (i % 13 === 9) return 'ask your server';
+            return `${(i % 4) + 1} 🥨`;
+        }
+
+        const PAGE_BACKS = [
+            { mark: '🍺', word: 'DANKE SCHÖN', sub: 'bitte wenden — more polka on the next page' },
+            { mark: '🪗', word: 'MEHR POLKA', sub: 'the kitchen never closes' },
+            { mark: '🥨', word: 'DAS ENDE', sub: 'you have reached the bottom of the menu' }
+        ];
+
+        function buildSongbook() {
+            ALBUMS.forEach((album, a) => {
+                const paper = document.createElement('div');
+                paper.className = 'paper';
+                paper.style.zIndex = 30 - a * 10;
+
+                const tracks = songs.slice(album.start, album.start + album.count).map((song, j) => {
+                    const i = album.start + j;
+                    return `<li data-song-index="${i}"><span class="track-num">${j + 1}</span><span class="track-title">${song.title}</span><span class="track-leader"></span><span class="track-price">${trackPrice(i)}</span></li>`;
+                }).join('');
+
+                const back = PAGE_BACKS[a];
+                paper.innerHTML = `
+                    <div class="page-front">
+                        <div class="page-inner">
+                            <p class="menu-kicker">POLKAHOLE SPEISEKARTE — SEITE ${a + 1} VON ${ALBUMS.length}</p>
+                            <h5 class="menu-title">${album.title}</h5>
+                            <div class="menu-rule"><span>🥨</span></div>
+                            <ul class="tracklist">${tracks}</ul>
+                            <p class="menu-footer">All prices in pretzels. No refunds, no substitutions, no mercy.</p>
+                        </div>
+                    </div>
+                    <div class="page-back">
+                        <div class="page-inner">
+                            <span class="page-back-mark">${back.mark}</span>
+                            <p class="page-back-word">${back.word}</p>
+                            <p class="page-back-sub">${back.sub}</p>
+                        </div>
+                    </div>`;
+                songbook.appendChild(paper);
+
+                const tab = document.createElement('button');
+                tab.className = 'songbook-tab' + (a === 0 ? ' active' : '');
+                tab.textContent = String(a + 1);
+                tab.title = album.title;
+                tab.setAttribute('aria-label', `Open ${album.title} page`);
+                tab.addEventListener('click', () => goToPage(a));
+                songbook.appendChild(tab);
             });
-        });
+
+            songbook.querySelectorAll('.tracklist li').forEach(li => {
+                li.addEventListener('click', () => loadSong(parseInt(li.getAttribute('data-song-index'))));
+            });
+        }
+
+        function goToPage(n) {
+            n = Math.max(0, Math.min(ALBUMS.length - 1, n));
+            currentPage = n;
+            songbook.querySelectorAll('.paper').forEach((paper, i) => {
+                paper.classList.toggle('flipped', i < n);
+            });
+            songbook.querySelectorAll('.songbook-tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i === n);
+            });
+        }
+
+        document.getElementById('page-prev').addEventListener('click', () => goToPage(currentPage - 1));
+        document.getElementById('page-next').addEventListener('click', () => goToPage(currentPage + 1));
+        buildSongbook();
 
         // THE POLKA BUTTON — one random track, no refunds
         const polkaButton = document.getElementById('polka-button');
@@ -1385,9 +1527,6 @@
                 document.getElementById('music').scrollIntoView();
             }, 650);
         });
-
-        // Initial render
-        renderSongList();
 
         // Deep links: ?song=N
         window.addEventListener('load', () => {
@@ -1489,6 +1628,156 @@
         }
 
         applyTheme();
+
+        // ============================================================
+        // THE HOUSE BAND — three little oompah men, built from boxes,
+        // playing along to the actual audio signal
+        // ============================================================
+        (function bandStage() {
+            const stageEl = document.getElementById('band-stage');
+            if (!window.THREE) { stageEl.style.display = 'none'; return; }
+
+            let renderer;
+            try {
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+            } catch (e) {
+                stageEl.style.display = 'none';
+                return;
+            }
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            stageEl.appendChild(renderer.domElement);
+
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a0f0a);
+            const camera = new THREE.PerspectiveCamera(38, 2, 0.1, 30);
+            camera.position.set(0, 1.05, 3.7);
+            camera.lookAt(0, 0.72, 0);
+
+            scene.add(new THREE.AmbientLight(0xffeedd, 0.6));
+            const key = new THREE.DirectionalLight(0xffdcb0, 0.85);
+            key.position.set(2, 3, 2.5);
+            scene.add(key);
+
+            const M = (hex) => new THREE.MeshLambertMaterial({ color: hex });
+            const mats = {
+                wood: M(0x7a4a28), wall: M(0x3a2317), skin: M(0xe8b98a),
+                shirt: M(0xf2ead6), brown: M(0x6e4526), darkbrown: M(0x5b3a21),
+                hat: M(0x3f5a36), brass: M(0xc8922f), red: M(0x9e342a), cream: M(0xf5ecd2)
+            };
+            const box = (w, h, d, mat) => new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+
+            // the hall
+            const wall = new THREE.Mesh(new THREE.PlaneGeometry(7, 3), mats.wall);
+            wall.position.set(0, 1.2, -0.9);
+            scene.add(wall);
+            const floor = box(5, 0.12, 2.0, mats.wood);
+            floor.position.y = -0.06;
+            scene.add(floor);
+
+            function makeMember(type, x) {
+                const g = new THREE.Group();
+                const legL = box(0.09, 0.26, 0.1, mats.darkbrown); legL.position.set(-0.08, 0.13, 0);
+                const legR = legL.clone(); legR.position.x = 0.08;
+                const hips = box(0.3, 0.16, 0.18, mats.brown); hips.position.y = 0.33;
+                const torso = box(0.3, 0.32, 0.17, mats.shirt); torso.position.y = 0.57;
+                const strapL = box(0.05, 0.32, 0.18, mats.brown); strapL.position.set(-0.09, 0.57, 0.002);
+                const strapR = strapL.clone(); strapR.position.x = 0.09;
+                const head = new THREE.Mesh(new THREE.SphereGeometry(0.115, 16, 12), mats.skin);
+                head.position.y = 0.84;
+                const brim = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.02, 16), mats.hat);
+                brim.position.y = 0.925;
+                const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.09, 0.1, 16), mats.hat);
+                cap.position.y = 0.98;
+                const armL = box(0.07, 0.24, 0.08, mats.shirt);
+                armL.position.set(-0.2, 0.6, 0.08); armL.rotation.x = -0.9;
+                const armR = armL.clone(); armR.position.x = 0.2;
+                g.add(legL, legR, hips, torso, strapL, strapR, head, brim, cap, armL, armR);
+
+                const parts = { head, brim, cap };
+                if (type === 'tuba') {
+                    const loop = new THREE.Mesh(new THREE.TorusGeometry(0.2, 0.05, 10, 24), mats.brass);
+                    loop.position.set(0, 0.62, 0.22);
+                    const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.07, 0.16, 16), mats.brass);
+                    bell.position.set(0, 0.95, 0.22);
+                    g.add(loop, bell);
+                    parts.bell = bell;
+                } else if (type === 'accordion') {
+                    const capL = box(0.08, 0.22, 0.15, mats.red);
+                    const capR = capL.clone();
+                    const bellows = box(0.2, 0.18, 0.13, mats.cream);
+                    bellows.position.set(0, 0.56, 0.22);
+                    capL.position.set(-0.14, 0.56, 0.22);
+                    capR.position.set(0.14, 0.56, 0.22);
+                    g.add(capL, capR, bellows);
+                    parts.bellows = bellows; parts.capL = capL; parts.capR = capR;
+                } else {
+                    const pipe = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.3, 10), mats.brass);
+                    const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.03, 0.09, 12), mats.brass);
+                    const horn = new THREE.Group();
+                    pipe.rotation.x = Math.PI / 2;
+                    pipe.position.z = 0.15;
+                    bell.rotation.x = Math.PI / 2;
+                    bell.position.z = 0.32;
+                    horn.add(pipe, bell);
+                    horn.position.set(0, 0.8, 0.1);
+                    g.add(horn);
+                    parts.horn = horn;
+                }
+                g.position.x = x;
+                g.userData = { type, parts, phase: x * 1.7 };
+                scene.add(g);
+                return g;
+            }
+
+            const band = [
+                makeMember('tuba', -0.95),
+                makeMember('accordion', 0),
+                makeMember('trumpet', 0.95)
+            ];
+
+            function resize() {
+                const w = stageEl.clientWidth, h = stageEl.clientHeight;
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+            }
+            window.addEventListener('resize', () => { resize(); if (reducedMotion.matches) renderer.render(scene, camera); });
+            resize();
+
+            const clock = new THREE.Clock();
+            function animate() {
+                const t = clock.getElapsedTime();
+                const playing = !audio.paused && currentSongIndex >= 0;
+                const level = playing ? audioLevel() : 0;
+                const energy = playing ? 0.3 + level : 0.08;
+
+                band.forEach(m => {
+                    const { type, parts, phase } = m.userData;
+                    m.position.y = Math.abs(Math.sin(t * 5 + phase)) * 0.09 * energy * 2;
+                    m.rotation.z = Math.sin(t * 2.5 + phase) * 0.06 * (0.5 + energy);
+                    parts.head.rotation.x = Math.sin(t * 5 + phase) * 0.25 * energy;
+
+                    if (type === 'tuba') {
+                        const s = 1 + level * 0.35;
+                        parts.bell.scale.set(s, 1, s);
+                    } else if (type === 'accordion') {
+                        const span = 0.1 + 0.12 * (0.5 + 0.5 * Math.sin(t * 6)) * (0.4 + level * 1.6);
+                        parts.bellows.scale.x = span / 0.1;
+                        parts.capL.position.x = -(span + 0.04);
+                        parts.capR.position.x = span + 0.04;
+                    } else {
+                        parts.horn.rotation.x = -0.05 - 0.4 * level;
+                    }
+                });
+                renderer.render(scene, camera);
+            }
+
+            if (reducedMotion.matches) {
+                renderer.render(scene, camera);
+            } else {
+                renderer.setAnimationLoop(animate);
+            }
+        })();
     </script>
 
 </body>
