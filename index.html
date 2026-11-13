@@ -22,16 +22,18 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://polkahole.ca/">
-    <meta property="og:title" content="Polkahole | Official Band Site">
-    <meta property="og:description" content="Official site of Polkahole - the high-energy polka band! Listen to our debut album 'Oompa Loompas and Syntax Errors'.">
-    <meta property="og:image" content="Gemini_Generated_Image_tevx5btevx5btevx.webp">
+    <meta property="og:title" content="POLKAHOLE — 100% Pure Artificial Oompah">
+    <meta property="og:description" content="Two adventurous intelligences — one born, one booted — making the polka nobody asked for and everybody needs. One human. Three albums. Infinite polka.">
+    <meta property="og:image" content="https://polkahole.ca/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://polkahole.ca/">
-    <meta property="twitter:title" content="Polkahole | Official Band Site">
-    <meta property="twitter:description" content="Official site of Polkahole - the high-energy polka band! Listen to our debut album 'Oompa Loompas and Syntax Errors'.">
-    <meta property="twitter:image" content="Gemini_Generated_Image_tevx5btevx5btevx.webp">
+    <meta property="twitter:title" content="POLKAHOLE — 100% Pure Artificial Oompah">
+    <meta property="twitter:description" content="Two adventurous intelligences — one born, one booted — making the polka nobody asked for and everybody needs. One human. Three albums. Infinite polka.">
+    <meta property="twitter:image" content="https://polkahole.ca/og-card.png">
 
     <script type="application/ld+json">
     {
@@ -1483,7 +1485,7 @@
         function updateMetadata(index) {
             const song = songs[index];
             const title = `${song.title} | Polkahole Official`;
-            const description = `Listen to "${song.title}" by Polkahole, the loudest, fastest, and most accordion-heavy band this side of the Danube!`;
+            const description = `Listen to "${song.title}" by Polkahole — the AI polka band with attitude. One human, three albums, infinite polka.`;
             const url = `${window.location.origin}${window.location.pathname}?song=${index}`;
             const image = `${window.location.origin}/${song.albumArt}`;
 
@@ -1528,8 +1530,9 @@
             if (typeof goToPage === 'function') goToPage(albumOfSong(index));
             initAnalyser();
 
-            audio.play();
-            setPlayingState(true);
+            audio.play()
+                .then(() => setPlayingState(true))
+                .catch(() => setPlayingState(false)); // autoplay blocked: track is loaded, ready on Play
         }
 
         // WebAudio analyser — feeds the band. Lazy: created on first
@@ -1562,7 +1565,7 @@
         function openShareModal() {
             const song = songs[currentSongIndex];
             const shareUrl = `${window.location.origin}${window.location.pathname}?song=${currentSongIndex}`;
-            const shareText = `Check out "${song.title}" by Polkahole! 🪗🔥`;
+            const shareText = `Check out "${song.title}" by Polkahole — the AI polka band with attitude! 🪗🔥`;
 
             shareSongInfo.textContent = `Sharing: ${song.title}`;
 
@@ -1793,6 +1796,7 @@
                 const index = parseInt(songIndex);
                 if (!isNaN(index) && index >= 0 && index < songs.length) {
                     loadSong(index);
+                    setTimeout(() => document.getElementById('music').scrollIntoView(), 350);
                 }
             }
         });
