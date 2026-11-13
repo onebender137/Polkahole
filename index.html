@@ -42,6 +42,14 @@
       "name": "Polkahole",
       "url": "https://polkahole.ca",
       "genre": "Polka",
+      "track": {
+        "@type": "MusicRecording",
+        "name": "No Noodle Required",
+        "duration": "PT2M45S",
+        "image": "https://polkahole.ca/No_Noodle_Required_Art.webp",
+        "audio": "https://polkahole.ca/No_Noodle_Required.mp3",
+        "url": "https://polkahole.ca/no-noodle-required.html"
+      },
       "album": [
         {
           "@type": "MusicAlbum",
@@ -475,6 +483,50 @@
             margin: 0 0 14px;
             min-height: 2.6em;
         }
+        .single-strip {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 560px;
+            margin: 0 auto 38px;
+            padding: 14px 22px 14px 14px;
+            border: 2px solid var(--oak);
+            background: rgba(255,250,238,0.6);
+            box-shadow: 6px 6px 0 rgba(36,22,16,0.14);
+            text-decoration: none;
+            text-align: left;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .single-strip:hover {
+            transform: translateY(-3px);
+            box-shadow: 8px 9px 0 rgba(36,22,16,0.18);
+        }
+        .single-strip img {
+            width: 88px;
+            height: 88px;
+            flex-shrink: 0;
+            border: 2px solid var(--oak);
+        }
+        .single-strip-text { display: flex; flex-direction: column; }
+        .single-strip-kicker {
+            font-family: var(--display);
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: var(--red);
+        }
+        .single-strip-title {
+            font-family: var(--display);
+            font-size: 1.5rem;
+            letter-spacing: 0.03em;
+            color: var(--oak);
+            line-height: 1.1;
+        }
+        .single-strip-sub {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--ink-soft);
+        }
+
         .zip-link {
             display: inline-block;
             margin-top: 10px;
@@ -813,6 +865,7 @@
         .songbook-tab:nth-of-type(1) { top: 36px; }
         .songbook-tab:nth-of-type(2) { top: 128px; }
         .songbook-tab:nth-of-type(3) { top: 220px; }
+        .songbook-tab:nth-of-type(4) { top: 312px; }
 
         .songbook-nav {
             display: flex;
@@ -1074,6 +1127,7 @@
             .songbook-tab:nth-of-type(1) { top: -34px; left: 8px; }
             .songbook-tab:nth-of-type(2) { top: -34px; left: 90px; }
             .songbook-tab:nth-of-type(3) { top: -34px; left: 172px; }
+            .songbook-tab:nth-of-type(4) { top: -34px; left: 254px; }
             .songbook { margin-top: 40px; }
             #band-stage { height: 190px; }
             section.bill { padding: 40px 0; }
@@ -1265,6 +1319,15 @@
                 <div class="orn-rule"><span>★ ★ ★</span></div>
                 <h2>The Albums</h2>
             </div>
+
+            <a class="single-strip" href="no-noodle-required.html">
+                <img src="No_Noodle_Required_Art.webp" alt="">
+                <span class="single-strip-text">
+                    <span class="single-strip-kicker">NEW SINGLE</span>
+                    <span class="single-strip-title">No Noodle Required</span>
+                    <span class="single-strip-sub">Video, audio and the whole story &rarr;</span>
+                </span>
+            </a>
 
             <div class="album-grid">
                 <div class="album-tile">
@@ -1461,7 +1524,8 @@
             { title: "Slice of Heavy Fate", file: "songs/whoa_polka/Slice_of_Heavy_Fate.mp3", albumArt: "Whoa_Polka_Art.webp" },
             { title: "The Rooster's Falsetto", file: "songs/whoa_polka/The_Rooster’s_Falsetto.mp3", albumArt: "Whoa_Polka_Art.webp" },
             { title: "The Polka Man Prevails", file: "songs/whoa_polka/The_Polka_Man_Prevails.mp3", albumArt: "Whoa_Polka_Art.webp" },
-            { title: "Left My Laces Behind", file: "songs/whoa_polka/Left_My_Laces_Behind.mp3", albumArt: "Whoa_Polka_Art.webp" }
+            { title: "Left My Laces Behind", file: "songs/whoa_polka/Left_My_Laces_Behind.mp3", albumArt: "Whoa_Polka_Art.webp" },
+            { title: "No Noodle Required", file: "No_Noodle_Required.mp3", albumArt: "No_Noodle_Required_Art.webp" }
         ];
 
         let currentSongIndex = -1;
@@ -1470,7 +1534,8 @@
         const ALBUMS = [
             { title: "Oompa Loompas and Syntax Errors", art: "Gemini_Generated_Image_tevx5btevx5btevx.webp", start: 0,  count: 12 },
             { title: "Polkin' the Hole",                art: "Gemini_Generated_Image_6sl51i6sl51i6sl5.webp", start: 12, count: 13 },
-            { title: "Whoa Polka!",                     art: "Whoa_Polka_Art.webp",                          start: 25, count: 11 }
+            { title: "Whoa Polka!",                     art: "Whoa_Polka_Art.webp",                          start: 25, count: 11 },
+            { title: "Frisch aus der Küche",             art: "No_Noodle_Required_Art.webp",                  start: 36, count: 1 }
         ];
         const albumOfSong = (i) => ALBUMS.findIndex(a => i >= a.start && i < a.start + a.count);
 
@@ -1700,7 +1765,8 @@
         const PAGE_BACKS = [
             { mark: '🍺', word: 'DANKE SCHÖN', sub: 'bitte wenden — more polka on the next page' },
             { mark: '🪗', word: 'MEHR POLKA', sub: 'the kitchen never closes' },
-            { mark: '🥨', word: 'DAS ENDE', sub: 'you have reached the bottom of the menu' }
+            { mark: '🥨', word: 'DAS ENDE', sub: 'you have reached the bottom of the menu' },
+            { mark: '🌙', word: 'FRISCH', sub: 'straight from the kitchen, still dripping' }
         ];
 
         function buildSongbook() {
@@ -1718,11 +1784,11 @@
                 paper.innerHTML = `
                     <div class="page-front">
                         <div class="page-inner">
-                            <p class="menu-kicker">POLKAHOLE SPEISEKARTE — SEITE ${a + 1} VON ${ALBUMS.length}</p>
+                            <p class="menu-kicker">${a === 3 ? 'TAGESKARTE — NEU' : `POLKAHOLE SPEISEKARTE — SEITE ${a + 1} VON ${ALBUMS.length - 1}`}</p>
                             <h5 class="menu-title">${album.title}</h5>
                             <div class="menu-rule"><span>🥨</span></div>
                             <ul class="tracklist">${tracks}</ul>
-                            <p class="menu-footer">All prices in pretzels. No refunds, no substitutions, no mercy.</p>
+                            <p class="menu-footer">${a === 3 ? 'Served fresh. <a href="no-noodle-required.html">Full page and video &rarr;</a>' : 'All prices in pretzels. No refunds, no substitutions, no mercy.'}</p>
                         </div>
                     </div>
                     <div class="page-back">
@@ -1736,7 +1802,7 @@
 
                 const tab = document.createElement('button');
                 tab.className = 'songbook-tab' + (a === 0 ? ' active' : '');
-                tab.textContent = String(a + 1);
+                tab.textContent = a === 3 ? '\u263D' : String(a + 1);
                 tab.title = album.title;
                 tab.setAttribute('aria-label', `Open ${album.title} page`);
                 tab.addEventListener('click', () => goToPage(a));
