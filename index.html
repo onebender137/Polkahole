@@ -193,6 +193,62 @@
             --green:#4A3B5C; --green-deep:#352A45;
             --brass:#C96A1E; --brass-light:#E68A3C; --red:#8E1B1B;
         }
+        /* Friday the 13th — the lights go out */
+        [data-theme="fridaythe13th"] {
+            --parchment:#101D2B; --parchment-deep:#1C2C3D;
+            --green:#2F5A52; --green-deep:#23463F;
+            --brass:#C8A94E; --brass-light:#EBD591;
+            --red:#B4252B;
+            --ink:#EDE3CC; --ink-soft:#A3957A;
+            --oak:#EDE3CC; --oak-light:#F6EEDC;
+        }
+        /* places that assumed light paper under dark ink */
+        [data-theme="fridaythe13th"] body {
+            background-image:
+                radial-gradient(ellipse at 50% -10%, rgba(200,169,78,0.17), transparent 62%),
+                repeating-linear-gradient(0deg, rgba(0,0,0,0.10) 0px, rgba(0,0,0,0.10) 1px, transparent 1px, transparent 3px);
+        }
+        [data-theme="fridaythe13th"] .masthead-frame,
+        [data-theme="fridaythe13th"] .roster-card,
+        [data-theme="fridaythe13th"] .single-strip {
+            background: rgba(8,16,26,0.55);
+        }
+        [data-theme="fridaythe13th"] .masthead-stamp { background: #0B1623; }
+        [data-theme="fridaythe13th"] .masthead-banner,
+        [data-theme="fridaythe13th"] .btn { color: var(--ink); }
+        [data-theme="fridaythe13th"] .btn.btn-brass,
+        [data-theme="fridaythe13th"] .songbook-tab,
+        [data-theme="fridaythe13th"] #polka-button { color: #14202E; }
+        [data-theme="fridaythe13th"] .player-shell {
+            background: linear-gradient(180deg, #0A1420, #050B13 32%);
+        }
+        [data-theme="fridaythe13th"] .player-shell,
+        [data-theme="fridaythe13th"] .current-track-info h4 { color: var(--ink); }
+        /* the menu is still printed on paper */
+        [data-theme="fridaythe13th"] .page-front,
+        [data-theme="fridaythe13th"] .page-back { color: #33241A; }
+        [data-theme="fridaythe13th"] .page-front .menu-title,
+        [data-theme="fridaythe13th"] .page-back-word { color: #2B4A42; }
+        [data-theme="fridaythe13th"] .page-front .track-title { color: #33241A; }
+        [data-theme="fridaythe13th"] .page-front .track-price,
+        [data-theme="fridaythe13th"] .menu-footer,
+        [data-theme="fridaythe13th"] .page-back-sub { color: #6B5541; }
+        [data-theme="fridaythe13th"] .modal-content { color: #33241A; }
+        [data-theme="fridaythe13th"] .modal-content h3 { color: #2B4A42; }
+        [data-theme="fridaythe13th"] .sheet-edge { background: #d8cdb0; }
+        /* active tab must read as paper, not as the night sky */
+        [data-theme="fridaythe13th"] .songbook-tab.active { background: #FBF5E4; }
+        [data-theme="fridaythe13th"] .masthead-partnership { color: var(--brass-light); }
+        [data-theme="fridaythe13th"] .band-punchline,
+        [data-theme="fridaythe13th"] .roster-card h5 { color: var(--brass-light); }
+        [data-theme="fridaythe13th"] .roster-instrument { color: var(--ink-soft); }
+        [data-theme="fridaythe13th"] .album-tile h4 { color: var(--brass-light); }
+        [data-theme="fridaythe13th"] #fan-zone input[type="email"] {
+            background: rgba(8,16,26,0.6);
+            color: var(--ink);
+        }
+        [data-theme="fridaythe13th"] #band-stage { background: #05090f; }
+
         /* oktoberfest keeps the house palette — it's already Oktoberfest in here */
 
         /* ambient falling bits (snow, leaves, bats, pretzels) */
@@ -421,6 +477,56 @@
         .btn:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
             outline: 3px solid var(--brass);
             outline-offset: 2px;
+        }
+
+        /* ============================================================
+           FRIDAY THE 13TH TAKEOVER — hidden every other day
+           ============================================================ */
+        .f13-hero { display: none; }
+        [data-theme="fridaythe13th"] .f13-hero {
+            display: block;
+            padding: 46px 20px 50px;
+            border-bottom: 6px double var(--oak);
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(200,169,78,0.16), transparent 60%);
+        }
+        .f13-inner {
+            max-width: 980px;
+            margin: auto;
+            display: flex;
+            gap: 42px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .f13-inner img {
+            width: 320px;
+            max-width: 100%;
+            border: 3px solid var(--oak);
+            outline: 1px solid var(--oak);
+            outline-offset: 5px;
+            box-shadow: 0 0 44px rgba(200,169,78,0.28);
+        }
+        .f13-text { flex: 1; min-width: 290px; }
+        .f13-kicker {
+            display: inline-block;
+            font-family: var(--display);
+            font-size: 1rem;
+            letter-spacing: 0.24em;
+            color: #F6EEDC;
+            background: var(--red);
+            padding: 5px 18px;
+            transform: rotate(-1.5deg);
+            margin-bottom: 12px;
+        }
+        .f13-text h2 { margin-bottom: 10px; }
+        .f13-text p { margin: 0 0 18px; max-width: 48ch; }
+        .f13-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .f13-foot {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--ink-soft);
+            margin-top: 18px !important;
         }
 
         /* ============================================================
@@ -1304,6 +1410,22 @@
         </div>
     </header>
 
+    <section class="f13-hero" id="f13-hero">
+        <div class="f13-inner">
+            <img src="No_Noodle_Required_Art.webp" alt="No Noodle Required cover art">
+            <div class="f13-text">
+                <span class="f13-kicker">IT IS FRIDAY THE 13TH</span>
+                <h2>No Noodle Required</h2>
+                <p>The moon is up, the lake is cold, and something in lederhosen just came out of the water holding an accordion. Tonight's main attraction.</p>
+                <div class="f13-actions">
+                    <button class="btn btn-brass" id="f13-play">&#9654; Play it loud</button>
+                    <a class="btn" href="no-noodle-required.html">Watch the video</a>
+                </div>
+                <p class="f13-foot">Back to the house lights on the 14th. Until then, enjoy the dark.</p>
+            </div>
+        </div>
+    </section>
+
     <main>
         <section id="welcome" class="bill">
             <div class="section-head">
@@ -1825,6 +1947,14 @@
             });
         }
 
+        const f13Play = document.getElementById('f13-play');
+        if (f13Play) {
+            f13Play.addEventListener('click', () => {
+                loadSong(songs.length - 1);
+                setTimeout(() => document.getElementById('music').scrollIntoView(), 400);
+            });
+        }
+
         document.getElementById('page-prev').addEventListener('click', () => goToPage(currentPage - 1));
         document.getElementById('page-next').addEventListener('click', () => goToPage(currentPage + 1));
         buildSongbook();
@@ -1901,6 +2031,7 @@
             easter:     { banner: 'HOPPY POLKA POWER',         orn: '✿', label: 'Easter Edition', sky: [] },
             canadaday:  { banner: 'TRUE NORTH POLKA POWER',    orn: '🍁', label: 'Canada Day Edition', sky: ['🍁'], skyCount: 12 },
             oktoberfest:{ banner: 'ES IST OKTOBERFEST, BABY',  orn: '🥨', label: 'Oktoberfest Edition', sky: ['🥨'], skyCount: 10 },
+            fridaythe13th: { banner: 'HAPPY FRIDAY THE 13TH', orn: '\u263D', label: 'Friday the 13th Edition', sky: ['\u263D', '\ud83e\udd87'], skyCount: 14 },
             halloween:  { banner: 'SPOOKY POLKA POWER',        orn: '🎃', label: 'Halloween Edition', sky: ['🦇', '🎃'], skyCount: 12 }
         };
 
@@ -1918,6 +2049,8 @@
 
         function resolveTheme(now) {
             const m = now.getMonth() + 1, d = now.getDate();
+            // the day itself wins over every season and holiday
+            if (d === 13 && now.getDay() === 5) return 'fridaythe13th';
             const md = m * 100 + d;
             if (md >= 1201 && md <= 1226) return 'christmas';
             if (md >= 1227 || md <= 105) return 'newyear';
