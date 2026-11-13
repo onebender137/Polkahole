@@ -284,6 +284,7 @@
             background: rgba(255, 250, 238, 0.45);
             position: relative;
         }
+        header.masthead { overflow-x: clip; }
         .masthead-stamp {
             position: absolute;
             top: -22px;
@@ -319,7 +320,24 @@
             right: -118px;
             transform: translateY(-48%) scaleX(-1) rotate(-3deg);
         }
+        /* keep the spill visible as the window narrows: shrink and tuck,
+           only give up where there is genuinely no room */
         @media (max-width: 1240px) {
+            .masthead-side { width: 150px; height: 316px; }
+            .masthead-side.left { left: -94px; }
+            .masthead-side.right { right: -94px; }
+        }
+        @media (max-width: 1040px) {
+            .masthead-side { width: 118px; height: 248px; }
+            .masthead-side.left { left: -68px; }
+            .masthead-side.right { right: -68px; }
+        }
+        @media (max-width: 860px) {
+            .masthead-side { width: 96px; height: 202px; }
+            .masthead-side.left { left: -30px; }
+            .masthead-side.right { right: -30px; }
+        }
+        @media (max-width: 660px) {
             .masthead-side { display: none; }
         }
         .masthead-presents {
